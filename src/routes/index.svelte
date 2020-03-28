@@ -1,11 +1,13 @@
 <script>
 import { onMount } from 'svelte';
+import { store } from '../store';
 import CountrySelector from '../components/CountrySelector.svelte';
 
-let country = undefined;
+let country = store.country;
+let countries = store.countries;
 
 onMount(async () => {
-	// country = await (await fetch(getCountryTodayStatsUrl('ES'), { mode: "cors"})).json();
+	countries = await store.fetchCountries();
 });
 </script>
 
@@ -17,14 +19,16 @@ onMount(async () => {
 </svelte:head>
 
 <svelte>
-	<CountrySelector/>
-	<input type="date" id="start" name="trip-start"
-       value="2018-07-22"
-       min="2018-01-01" max="2018-12-31">
+	{#if countries}
+		<CountrySelector countries={countries}/>
+	{/if}
 	{#if country}
 		<p>{country.countryName}</p>
 		<p>{country.confirmedCases}</p>
 		<p>{country.deathsNumber}</p>
+		<input type="date" id="start" name="trip-start"
+		value="2018-07-22"
+		min="2018-01-01" max="2018-12-31">
 	{:else}
 		<p>...fetching</p>		
 	{/if}

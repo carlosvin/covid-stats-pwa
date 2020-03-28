@@ -1,36 +1,49 @@
 import {ApiClient} from './services/api';
 
+const KEYS = {
+    COUNTRY: 'country',
+    COUNTRIES: 'countries',
+}; 
+
 class Store {
 
     constructor() {
         this._api = new ApiClient();
-        if (typeof localStorage !== 'undefined') {
-            this._lastCountry = localStorage.getItem('lastCountry');
-            this._countries =  localStorage.getItem('countries');
-        }        
+        this._lastCountry = this._read(KEYS.COUNTRY);
+        this._countries = this._read(KEYS.COUNTRIES);
     }
 
-    get lastCountry () {
+    get country () {
         return this._lastCountry;
     }
 
-    setLastCountry(countryCode){
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('lastCountry', countryCode);
-        }
+    get countries () {
+        return this._countries;
     }
 
-    async getCountries () {
+    setLastCountry(countryData){
+        this._lastCountry = countryData;
+        this._save(KEYS.COUNTRY, countryData);
+    }
+
+    async fetchCountries () {
         if (!this._countries) {
             this._countries = await this._api.fetchCountries();
-            this._setCountries(this._countries);
+            this._save(KEYS.COUNTRIES, this._countries);
         }
         return this._countries;
     }
 
-    _setCountries (countries) {
-        if (localStorage && countries) {
-            localStorage.setItem('countries', countries);
+    _save(key, value) {
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+    }
+
+    _read(key) {
+        if (typeof localStorage !== 'undefined') {
+            const valueStr = localStorage.getItem(key);
+            return valueStr && JSON.parse(valueStr);
         }
     }
 }

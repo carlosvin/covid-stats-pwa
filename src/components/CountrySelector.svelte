@@ -1,12 +1,7 @@
 <script>
-import { store } from '../store';
-import { onMount } from 'svelte';
 
-let countries = undefined;
+export let countries = undefined;
 
-onMount(async () => {
-	countries = await store.getCountries();
-});
 </script>
 
 <style>
@@ -14,8 +9,7 @@ onMount(async () => {
 
 <select>
 	{#if countries}
-		{@debug countries}
-		{#each countries as country}
+		{#each [...Object.values(countries)] as country}
 			<option value={country.countryCode}>{country.countryName}</option>
 		{/each}
 	{/if}
