@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "covid-stats-pwa",
+  "description": "PWA to monitor COVID-19 statistics",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -11,6 +11,14 @@
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
     "serve:export": "serve  __sapper__/export"
+  },
+  "author": {
+    "email": "carlosvin@gmail.com",
+    "name": "Carlos Martin Sanchez"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlosvin/covid-stats-pwa"
   },
   "dependencies": {
     "compression": "^1.7.1",
