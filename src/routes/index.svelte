@@ -3,11 +3,14 @@ import { onMount } from 'svelte';
 import { store } from '../store';
 import CountrySelector from '../components/CountrySelector.svelte';
 
-let country = store.country;
 let countries = store.countries;
+let country = store.country;
 
 onMount(async () => {
 	countries = await store.fetchCountries();
+	if (countries && !country) {
+		country = Object.values(countries)[0];
+	}
 });
 
 function handleCountryChange(c) {
@@ -25,7 +28,7 @@ function handleCountryChange(c) {
 
 <svelte>
 	{#if countries}
-		<CountrySelector country={country} countries={countries} on:selected={handleCountryChange}/>
+		<CountrySelector countryCode={country && country.countryCode} countries={countries} on:selected={handleCountryChange}/>
 	{/if}
 	{#if country}
 		<p><a href="{country.path}">{country.countryName} ({country.countryCode})</a></p>

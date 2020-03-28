@@ -7,17 +7,16 @@ function selected (e) {
 }
 
 export let countries = undefined;
-export let country = {countryCode: undefined};
-
+export let countryCode = undefined;
 </script>
 
 <style>
 </style>
 
 {#if countries}
-	<select bind:value={country.countryCode} on:change={selected}>
-		{#each [...Object.values(countries)] as country}
-			<option value={country.countryCode}>{country.countryName}</option>
+	<select bind:value={countryCode} on:change={selected}>
+		{#each [...Object.values(countries)] as c}
+			<option value={c.countryCode}>{c.countryName}</option>
 		{/each}
 	</select>
 {/if}
