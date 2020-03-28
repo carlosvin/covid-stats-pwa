@@ -3,7 +3,7 @@
 	"theme_color": "#333333",
 	"name": "COVID-19 Stats",
 	"short_name": "COVID stats",
-	"display": "minimal-ui",
+	"display": "standalone",
 	"start_url": "/",
 	"icons": [
 		{
