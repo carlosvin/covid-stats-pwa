@@ -9,6 +9,11 @@ let countries = store.countries;
 onMount(async () => {
 	countries = await store.fetchCountries();
 });
+
+function handleCountryChange(c) {
+	country = c.detail;
+	store.setCountry(country);
+}
 </script>
 
 <style>
@@ -20,16 +25,16 @@ onMount(async () => {
 
 <svelte>
 	{#if countries}
-		<CountrySelector countries={countries}/>
+		<CountrySelector country={country} countries={countries} on:selected={handleCountryChange}/>
 	{/if}
 	{#if country}
-		<p>{country.countryName}</p>
+		<p><a href="{country.path}">{country.countryName} ({country.countryCode})</a></p>
 		<p>{country.confirmedCases}</p>
 		<p>{country.deathsNumber}</p>
 		<input type="date" id="start" name="trip-start"
-		value="2018-07-22"
-		min="2018-01-01" max="2018-12-31">
+			value="2018-07-22"
+			min="2018-01-01" max="2018-12-31">
 	{:else}
-		<p>...fetching</p>		
+		<p>...fetching</p>
 	{/if}
 </svelte>

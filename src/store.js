@@ -21,7 +21,7 @@ class Store {
         return this._countries;
     }
 
-    setLastCountry(countryData){
+    setCountry(countryData){
         this._lastCountry = countryData;
         this._save(KEYS.COUNTRY, countryData);
     }
