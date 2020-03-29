@@ -2,6 +2,7 @@
 import { onMount } from 'svelte';
 import { store } from '../store';
 import CountrySelector from '../components/CountrySelector.svelte';
+import Spinner from '../components/Spinner.svelte';
 
 let countries = store.countries;
 let country = store.country;
@@ -38,6 +39,6 @@ function handleCountryChange(c) {
 			value="2018-07-22"
 			min="2018-01-01" max="2018-12-31">
 	{:else}
-		<p>...fetching</p>
+		<Spinner>Fetching...</Spinner>
 	{/if}
 </svelte>
