@@ -1,11 +1,14 @@
 <script>
-import { onMount } from 'svelte';
-import { store } from '../store';
-import CountrySelector from '../components/CountrySelector.svelte';
-import Spinner from '../components/Spinner.svelte';
+import { onMount } from "svelte";
+import { store } from "../store";
+import { getIsoDate } from "../services/dates";
+import CountrySelector from "../components/CountrySelector.svelte";
+import Stats from "../components/Stats.svelte";
+import Spinner from "../components/Spinner.svelte";
 
 let countries = store.countries;
 let country = store.country;
+const today = getIsoDate();
 
 onMount(async () => {
 	countries = await store.fetchCountries();
@@ -21,24 +24,34 @@ function handleCountryChange(c) {
 </script>
 
 <style>
+
 </style>
 
 <svelte:head>
-	<title>COVID-19 cases</title>
+  <title>COVID-19 cases</title>
 </svelte:head>
 
 <svelte>
-	{#if countries}
-		<CountrySelector countryCode={country && country.countryCode} countries={countries} on:selected={handleCountryChange}/>
-	{/if}
-	{#if country}
-		<p><a href="{country.path}">{country.countryName} ({country.countryCode})</a></p>
-		<p>{country.confirmedCases}</p>
-		<p>{country.deathsNumber}</p>
-		<input type="date" id="start" name="trip-start"
-			value="2018-07-22"
-			min="2018-01-01" max="2018-12-31">
-	{:else}
-		<Spinner>Fetching...</Spinner>
-	{/if}
+  {#if countries}
+    <CountrySelector
+      countryCode={country && country.countryCode}
+      {countries}
+      on:selected={handleCountryChange} />
+  {/if}
+  {#if country}
+    <p>
+      <a href={country.path}>{country.countryName} ({country.countryCode})</a>
+    </p>
+    <Stats
+      data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
+    <input
+      type="date"
+      id="when"
+      name="when"
+      value={today}
+      min="2019-12-01"
+      max={today} />
+  {:else}
+    <Spinner>Fetching...</Spinner>
+  {/if}
 </svelte>
