@@ -2,6 +2,7 @@
 </script>
 <svelte:head>
 	<title>About</title>
+	<meta name="description" content="app.description">
 </svelte:head>
 
 <h1>COVID 19 Stats</h1>
