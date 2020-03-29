@@ -32,6 +32,7 @@ async function handleDateChange(d) {
   try {
     dateStats = await store.fetchCountryDate(country.countryCode, selectedDateStr);
   } catch (e) {
+    dateStats = undefined;
     console.log(e);
   }
   isFetching = false;

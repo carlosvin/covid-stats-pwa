@@ -38,17 +38,19 @@ class Store {
 
     getCountryDate(countryCode, dateStr) {
         if (countryCode in this._countriesDates) {
-            return this._countriesDates[country].dates[dateStr];
+            return this._countriesDates[countryCode].dates[dateStr];
         }
         return undefined;
     }
 
     setCountryDate(countryCode, dateStr, date) {
         if (countryCode in this._countriesDates) {
-            this._countriesDates[country].dates[dateStr] = {...date, timestamp: new Date().getTime()};
+            this._countriesDates[countryCode].dates[dateStr] = {...date, timestamp: new Date().getTime()};
         } else {
             this._countriesDates = {...this._countriesDates, 
-                country: { dates: {dateStr: {...date, timestamp: new Date().getTime()}}}
+                [countryCode]: { 
+                    ...this._countriesDates[countryCode], 
+                    dates: {[dateStr]: {...date, timestamp: new Date().getTime()}}}
             };
         }
     }
