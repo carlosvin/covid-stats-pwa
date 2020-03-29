@@ -22,7 +22,10 @@ export default {
 			analyze({summaryOnly: true}),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'app.version': pkg.version,
+				'app.name': pkg.name,
+				'app.description': pkg.description,
 			}),
 			svelte({
 				dev,
