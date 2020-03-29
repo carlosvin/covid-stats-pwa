@@ -18,7 +18,7 @@ class Store {
     }
 
     get countries () {
-        return this._countries;
+        return this._countries ? this._countries.countries : undefined;
     }
 
     setCountry(countryData){
@@ -27,11 +27,15 @@ class Store {
     }
 
     async fetchCountries () {
-        if (!this._countries) {
-            this._countries = await this._api.fetchCountries();
+        if (!this._countries || this._isTooOld(this._countries.timestamp)) {
+            this._countries = {countries: await this._api.fetchCountries(), timestamp: new Date().getTime()};
             this._save(KEYS.COUNTRIES, this._countries);
         }
-        return this._countries;
+        return this.countries;
+    }
+
+    _isTooOld(timestamp = 0) {
+        return (new Date().getTime() - timestamp) > 3600000;
     }
 
     _save(key, value) {

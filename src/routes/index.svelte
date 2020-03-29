@@ -12,6 +12,7 @@ const today = getIsoDate();
 
 onMount(async () => {
 	countries = await store.fetchCountries();
+  console.log("Updated countries", countries);
 	if (countries && !country) {
 		country = Object.values(countries)[0];
 	}
