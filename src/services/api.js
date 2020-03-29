@@ -15,8 +15,8 @@ export class ApiClient {
         return ApiClient.fetch(this._url.getCountry(country));
     }
 
-    async fetchCountryToday (country) {
-        return ApiClient.fetch(this._url.getCountryDate(country, getIsoDate()));
+    async fetchCountryDate(country, dateStr) {
+        return ApiClient.fetch(this._url.getCountryDate(country, dateStr));
     }
 
     static async fetch(url){

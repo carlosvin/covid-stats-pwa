@@ -1,6 +1,6 @@
 <script>
 import { onMount } from "svelte";
-import { store } from "../store";
+import { store } from "../services/store";
 import { getIsoDate } from "../services/dates";
 import CountrySelector from "../components/CountrySelector.svelte";
 import Stats from "../components/Stats.svelte";
@@ -8,20 +8,42 @@ import Spinner from "../components/Spinner.svelte";
 
 let countries = store.countries;
 let country = store.country;
-const today = getIsoDate();
+let today = getIsoDate();
+let dateStats = undefined;
+let selectedDateStr = getIsoDate();
+let isFetching = false;
 
 onMount(async () => {
-	countries = await store.fetchCountries();
-  console.log("Updated countries", countries);
+  try {
+    isFetching = true;
+  	countries = await store.fetchCountries();
+  }catch (e) {
+    console.log(e);
+  }
+  isFetching = false;
 	if (countries && !country) {
 		country = Object.values(countries)[0];
 	}
 });
 
+async function handleDateChange(d) {
+  selectedDateStr = d.target.value;
+  isFetching = true;
+  try {
+    dateStats = await store.fetchCountryDate(country.countryCode, selectedDateStr);
+  } catch (e) {
+    console.log(e);
+  }
+  isFetching = false;
+}
+
 function handleCountryChange(c) {
 	country = c.detail;
-	store.setCountry(country);
+  store.setCountry(country);
+  selectedDateStr = getIsoDate();
+  dateStats = undefined;
 }
+
 </script>
 
 <style>
@@ -51,8 +73,16 @@ function handleCountryChange(c) {
       name="when"
       value={today}
       min="2019-12-01"
-      max={today} />
-  {:else}
-    <Spinner>Fetching...</Spinner>
+      max={today}
+      on:change={handleDateChange}/>
+  {/if}
+
+  {#if dateStats}
+     <Stats
+      data={{ Deaths: dateStats.deathsNumber, Confirmed: dateStats.confirmedCases }} />
+  {/if}
+
+  {#if isFetching}
+      <Spinner>Fetching...</Spinner>
   {/if}
 </svelte>
