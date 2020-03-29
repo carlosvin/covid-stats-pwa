@@ -15,7 +15,7 @@ export let countryCode = undefined;
 
 {#if countries}
 	<select bind:value={countryCode} on:change={selected}>
-		{#each [...Object.values(countries)] as c}
+		{#each [...Object.values(countries).sort((a, b) => a.countryName.localeCompare(b.countryName))] as c}
 			<option value={c.countryCode}>{c.countryName}</option>
 		{/each}
 	</select>
