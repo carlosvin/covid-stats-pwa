@@ -28,6 +28,7 @@
     font-style: italic;
     font-size: smaller;
     padding-left: 0.1rem;
+    text-align: left;
   }
 </style>
 
