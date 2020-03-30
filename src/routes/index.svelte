@@ -6,6 +6,7 @@
     import Stats from "../components/Stats.svelte";
     import Spinner from "../components/Spinner.svelte";
     import Error from "../components/Error.svelte";
+    import IconLink from "../components/IconLink.svelte";
 
     let countries = store.countries;
     let country = store.country;
@@ -62,9 +63,6 @@
 </script>
 
 <style>
-img {
-  vertical-align: middle;
-}
 </style>
 
 <svelte:head>
@@ -79,8 +77,11 @@ img {
       on:selected={handleCountryChange} />
   {/if}
   {#if country}
-  
-    <a rel='prefetch' href={country.path}><img width="32px" height="32px" src='/bar_chart-24px.svg' alt='Chart for {country.countryName}' title='Chart for {country.countryName}'/></a>
+    <IconLink 
+      href={country.path}
+      rel='prefetch'
+      src='/bar_chart-24px.svg'
+      title='Chart for {country.countryName}'/>
     <Stats
       caption='Totals'
       data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
