@@ -81,6 +81,7 @@
       <a href={country.path}>{country.countryName} ({country.countryCode})</a>
     </p>
     <Stats
+      caption='Totals'
       data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
     <input
       type="date"
@@ -94,6 +95,7 @@
 
   {#if dateStats}
     <Stats
+      caption={dateStats.date}
       data={{ Deaths: dateStats.deathsNumber, Confirmed: dateStats.confirmedCases }} />
   {/if}
 

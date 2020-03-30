@@ -1,5 +1,6 @@
 <script>
   export let data = {};
+  export let caption = undefined;
 </script>
 
 <style>
@@ -22,11 +23,22 @@
     margin: 0;
     padding: 2px 4px;
   }
+  figcaption {
+    margin-top: -1.0rem;
+    font-style: italic;
+    font-size: smaller;
+    padding-left: 0.1rem;
+  }
 </style>
 
-<dl>
-  {#each [...Object.entries(data)] as [key, value]}
-    <dt>{key}</dt>
-    <dd>{value}</dd>
-  {/each}
-</dl>
+<figure>
+  <dl>
+    {#each [...Object.entries(data)] as [key, value]}
+      <dt>{key}</dt>
+      <dd>{value}</dd>
+    {/each}
+  </dl>
+  {#if caption}
+    <figcaption>{caption}</figcaption>
+  {/if}
+</figure>
