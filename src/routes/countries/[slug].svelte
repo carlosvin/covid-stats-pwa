@@ -19,8 +19,18 @@
 </script>
 
 <script>
+	import Stats from '../../components/Stats.svelte';
 	export let dates;
 	export let country;
+	let data = {
+		labels: Object.keys(dates),
+		datasets: [
+		{
+			values: Object.values(dates).map(d => d.confirmedCases)
+		}
+		]
+  };
+
 </script>
 
 <style>
@@ -34,5 +44,21 @@
 <h1>{country}</h1>
 
 <div>
-	{dates}
+	{#await import('svelte-frappe-charts') then c}
+		<svelte:component 
+			this={c.default} 
+			data={data} 
+			type="line"
+			axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: 1}} 
+			lineOptions={{
+				hideDots: 1, 
+				areaFill: 1, 
+				heatline: 1, 
+				dotSize: 0, 
+				hideLine: 0, 
+				regionFill: 1 }}/>
+	{/await}
+	{#each Object.values(dates) as date}
+		<Stats data={date}></Stats>
+	{/each}
 </div>

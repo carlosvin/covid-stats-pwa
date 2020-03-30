@@ -1,4 +1,5 @@
 <style>
+/* TODO use https://svelte.dev/docs#svelte_transition */
     div {
         display: flex;
         flex-direction: column;
