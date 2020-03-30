@@ -62,7 +62,9 @@
 </script>
 
 <style>
-
+img {
+  vertical-align: middle;
+}
 </style>
 
 <svelte:head>
@@ -77,9 +79,8 @@
       on:selected={handleCountryChange} />
   {/if}
   {#if country}
-    <p>
-      <a rel='prefetch' href={country.path}>{country.countryName} ({country.countryCode})</a>
-    </p>
+  
+    <a rel='prefetch' href={country.path}><img width="32px" height="32px" src='/bar_chart-24px.svg' alt='Chart for {country.countryName}' title='Chart for {country.countryName}'/></a>
     <Stats
       caption='Totals'
       data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />

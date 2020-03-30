@@ -1,13 +1,11 @@
 <script context="module">
     // import { store } from "../../services/store";
-	import { ApiClient } from "../../services/api";
+	import { Url } from "../../services/url";
 
-	const api = new ApiClient();
+	const url = new Url();
 
 	export async function preload({ params, query }) {
-		// the `slug` parameter is available because
-		// this file is called [slug].svelte
-		const res = await this.fetch(api._url.getCountryDates(params.slug));
+		const res = await this.fetch(url.getCountryDates(params.slug));
 		const data = await res.json();
 		const dates = Object.values(data).map(d => [new Date(d.date).getTime(), d]).sort();
 		if (res.status === 200) {
@@ -26,7 +24,7 @@
 		datasets: [
 		{name: "Confirmed", values: dates.map(d => d[1].confirmedCases)},
 		{name: "Deaths", values: dates.map(d => d[1].deathsNumber)}
-		]
+	]
   };
 
 </script>
@@ -45,9 +43,8 @@
 	{#await import('svelte-frappe-charts') then c}
 		<svelte:component 
 			this={c.default} 
-			data={data} 
+			data={data}
 			type="line"
-			tooltipOptions={{valuesOverPoints: 1 }}
 			axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true}}
 			lineOptions={{
 				hideDots: 1, 
