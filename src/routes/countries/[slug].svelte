@@ -1,5 +1,5 @@
 <script context="module">
-    // import { store } from "../../services/store";
+    import { store } from "../../services/store";
 	import { Url } from "../../services/url";
 
 	const url = new Url();
@@ -18,7 +18,7 @@
 					continue;
 				}
 			}
-			return { dates, country: params.slug };
+			return { dates, country: store.getCountryName(params.slug) };
 		} else {
 			this.error(res.status, data.message);
 		}

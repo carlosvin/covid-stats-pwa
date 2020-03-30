@@ -23,6 +23,11 @@ class Store {
         return this._countries && this._countries.countries;
     }
 
+    /** @returns Country name if exists otherwise  it returns input code */
+    getCountryName (code) {
+        return code in this.countries ? this.countries[code].countryName : code;
+    }
+
     setCountry(countryData){
         this._lastCountry = countryData;
         this._save(KEYS.COUNTRY, countryData);
