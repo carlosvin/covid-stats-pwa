@@ -1,4 +1,3 @@
-import {getIsoDate} from './dates';
 import {Url} from './url';
 
 export class ApiClient {
@@ -8,18 +7,22 @@ export class ApiClient {
     }
 
     async fetchCountries(){
-        return ApiClient.fetch(this._url.countries);
+        return ApiClient._fetch(this._url.countries);
     }
 
     async fetchCountry(country){
-        return ApiClient.fetch(this._url.getCountry(country));
+        return ApiClient._fetch(this._url.getCountry(country));
+    }
+
+    async fetchCountryDates(country){
+        return ApiClient._fetch(this._url.getCountryDates(country));
     }
 
     async fetchCountryDate(country, dateStr) {
-        return ApiClient.fetch(this._url.getCountryDate(country, dateStr));
+        return ApiClient._fetch(this._url.getCountryDate(country, dateStr));
     }
 
-    static async fetch(url){
+    static async _fetch(url){
         const response = await fetch(url);
         if (response.ok) {
             return response.json();
