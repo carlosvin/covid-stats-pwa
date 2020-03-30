@@ -9,9 +9,9 @@
 		// this file is called [slug].svelte
 		const res = await this.fetch(api._url.getCountryDates(params.slug));
 		const data = await res.json();
-
+		const dates = Object.values(data).map(d => [new Date(d.date).getTime(), d]).sort();
 		if (res.status === 200) {
-			return { dates: data, country: params.slug };
+			return { dates, country: params.slug };
 		} else {
 			this.error(res.status, data.message);
 		}
@@ -19,15 +19,13 @@
 </script>
 
 <script>
-	import Stats from '../../components/Stats.svelte';
 	export let dates;
 	export let country;
 	let data = {
-		labels: Object.keys(dates),
+		labels: dates.map(p => new Date(p[0]).toDateString()),
 		datasets: [
-		{
-			values: Object.values(dates).map(d => d.confirmedCases)
-		}
+		{name: "Confirmed", values: dates.map(d => d[1].confirmedCases)},
+		{name: "Deaths", values: dates.map(d => d[1].deathsNumber)}
 		]
   };
 
@@ -49,7 +47,8 @@
 			this={c.default} 
 			data={data} 
 			type="line"
-			axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: 1}} 
+			tooltipOptions={{valuesOverPoints: 1 }}
+			axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true}}
 			lineOptions={{
 				hideDots: 1, 
 				areaFill: 1, 
@@ -58,7 +57,4 @@
 				hideLine: 0, 
 				regionFill: 1 }}/>
 	{/await}
-	{#each Object.values(dates) as date}
-		<Stats data={date}></Stats>
-	{/each}
 </div>
