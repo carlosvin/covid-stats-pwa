@@ -20,6 +20,11 @@ export class ApiClient {
     }
 
     static async fetch(url){
-        return await((await fetch(url)).json());
+        const response = await fetch(url);
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw response;
+        }
     }
 }
