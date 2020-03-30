@@ -24,11 +24,11 @@
     padding: 2px 4px;
   }
   figcaption {
-    margin-top: -1.0rem;
-    font-style: italic;
+    margin-top: -0.9rem;
     font-size: smaller;
-    padding-left: 0.1rem;
-    text-align: left;
+    padding-right: 0.2rem;
+    text-align: right;
+    color: rgb(120, 120, 120);
   }
 </style>
 

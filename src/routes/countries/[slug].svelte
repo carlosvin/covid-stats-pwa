@@ -18,11 +18,10 @@
 	export async function preload({ params, query }) {
 		const res = await this.fetch(url.getCountryDates(params.slug));
 		const data = await res.json();
-
 		
 		if (res.status === 200) {
 			const dates = getDatesFromResponse(data);
-			return { dates, country: store.getCountryName(params.slug) };
+			return { dates, country: store.countries[params.slug] };
 		} else {
 			this.error(res.status, data.message);
 		}
@@ -30,6 +29,7 @@
 </script>
 
 <script>
+	import Stats from '../../components/Stats.svelte';
 	export let dates;
 	export let country;
 	let data = {
@@ -47,12 +47,16 @@
 </style>
 
 <svelte:head>
-	<title>New cases in {country}</title>
+	<title>New cases in {country.countryName}</title>
 </svelte:head>
 
-<h1>New cases in {country}</h1>
+<h1>New cases in {country.countryName}</h1>
 
 <div>
+	<Stats 
+		caption='Totals' 
+		data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
+	
 	{#await import('svelte-frappe-charts') then c}
 		<svelte:component 
 			this={c.default} 
