@@ -97,8 +97,9 @@
       data={{ Deaths: dateStats.deathsNumber, Confirmed: dateStats.confirmedCases }} />
   {/if}
 
+  <Error msg={error}/>
+
   {#if isFetching}
     <p><Spinner>Fetching...</Spinner></p>
   {/if}
-  <Error msg={error}/>
 </svelte>
