@@ -78,7 +78,7 @@
   {/if}
   {#if country}
     <p>
-      <a href={country.path}>{country.countryName} ({country.countryCode})</a>
+      <a rel='prefetch' href={country.path}>{country.countryName} ({country.countryCode})</a>
     </p>
     <Stats
       caption='Totals'
