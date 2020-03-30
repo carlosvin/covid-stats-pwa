@@ -4,20 +4,24 @@
 
 	const url = new Url();
 
+	function getDatesFromResponse(data) {
+		const tmpDates = Object.values(data).map(d => [new Date(d.date).getTime(), d]).sort();
+		const dates = [];
+		for (const d of tmpDates) {
+			if (d[1].confirmedCases > 0 || d[1].deathsNumber > 0 || dates.length > 0) {
+				dates.push(d);
+			}
+		}
+		return dates;
+	}
+
 	export async function preload({ params, query }) {
 		const res = await this.fetch(url.getCountryDates(params.slug));
 		const data = await res.json();
+
 		
 		if (res.status === 200) {
-			const tmpDates = Object.values(data).map(d => [new Date(d.date).getTime(), d]).sort();
-			const dates = [];
-			for (const d of tmpDates) {
-				if (d[1].confirmedCases > 0 && d[1].deathsNumber > 0) {
-					dates.push(d);
-				} else {
-					continue;
-				}
-			}
+			const dates = getDatesFromResponse(data);
 			return { dates, country: store.getCountryName(params.slug) };
 		} else {
 			this.error(res.status, data.message);
@@ -43,10 +47,10 @@
 </style>
 
 <svelte:head>
-	<title>{country}</title>
+	<title>New cases in {country}</title>
 </svelte:head>
 
-<h1>{country}</h1>
+<h1>New cases in {country}</h1>
 
 <div>
 	{#await import('svelte-frappe-charts') then c}

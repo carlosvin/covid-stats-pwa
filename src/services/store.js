@@ -25,7 +25,7 @@ class Store {
 
     /** @returns Country name if exists otherwise  it returns input code */
     getCountryName (code) {
-        return code in this.countries ? this.countries[code].countryName : code;
+        return this.countries && code in this.countries ? this.countries[code].countryName : code;
     }
 
     setCountry(countryData){
