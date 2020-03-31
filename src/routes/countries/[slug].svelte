@@ -4,24 +4,12 @@
 
 	const url = new Url();
 
-	function getDatesFromResponse(data) {
-		const tmpDates = Object.values(data).map(d => [new Date(d.date).getTime(), d]).sort();
-		const dates = [];
-		for (const d of tmpDates) {
-			if (d[1].confirmedCases > 0 || d[1].deathsNumber > 0 || dates.length > 0) {
-				dates.push(d);
-			}
-		}
-		return dates;
-	}
-
 	export async function preload({ params, query }) {
 		const res = await this.fetch(url.getCountryDates(params.slug));
 		const data = await res.json();
 		
 		if (res.status === 200) {
-			const dates = getDatesFromResponse(data);
-			return { dates, country: store.countries[params.slug] };
+			return { dates: data, country: store.countries[params.slug] };
 		} else {
 			this.error(res.status, data.message);
 		}
@@ -30,16 +18,10 @@
 
 <script>
 	import Stats from '../../components/Stats.svelte';
+	import TimeSerieChart from '../../components/TimeSerieChart.svelte';
+	
 	export let dates;
 	export let country;
-	let data = {
-		labels: dates.map(p => new Date(p[0]).toDateString()),
-		datasets: [
-		{name: "Confirmed", values: dates.map(d => d[1].confirmedCases)},
-		{name: "Deaths", values: dates.map(d => d[1].deathsNumber)}
-	]
-  };
-
 </script>
 
 <style>
@@ -57,18 +39,5 @@
 		caption='Totals' 
 		data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
 	
-	{#await import('svelte-frappe-charts') then c}
-		<svelte:component 
-			this={c.default} 
-			data={data}
-			type="line"
-			axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true}}
-			lineOptions={{
-				hideDots: 1, 
-				areaFill: 1, 
-				heatline: 1, 
-				dotSize: 0, 
-				hideLine: 0, 
-				regionFill: 1 }}/>
-	{/await}
+	<TimeSerieChart datesMap={dates} caption={country.countryName}/>
 </div>
