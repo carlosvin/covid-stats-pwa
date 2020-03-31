@@ -16,10 +16,10 @@ function getData(datesMap) {
     return {
         labels: [...datesMap.keys()],
         datasets: [
-           // { name: "Confirmed Agg", values: values.map(v => (totalC = v.confirmedCases + totalC)) },
+            // { name: "Confirmed Agg", values: values.map(v => (totalC = v.confirmedCases + totalC)) },
             { name: "Confirmed", values: confirmedList },
             { name: "Deaths", values: deathsList },
-            { name: "Deaths aggregated", values: deathsList.map(v => (totalD = v + totalD)) },
+            //{ name: "Deaths aggregated", values: deathsList.map(v => (totalD = v + totalD)) },
         ],
         totals: {
             "Confirmed": confirmedList.reduce((a, b) => a + b),
@@ -39,6 +39,6 @@ function getData(datesMap) {
         axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
         lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} />
         <figcaption>
-        <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
+            <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
         </figcaption>
 </figure>
