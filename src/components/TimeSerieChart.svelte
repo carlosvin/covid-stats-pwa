@@ -1,39 +1,30 @@
 <script>
 import Chart from 'svelte-frappe-charts';
+import Stats from './Stats.svelte';
 
 export let datesMap;
 export let lastDateStr;
 
-$: data = getData(lastDateStr, datesMap);
+$: data = getData(datesMap);
 
-function filterInitialDates(datesMap, epochSeconds = undefined) {
-    const map = new Map();
-
-    for (const k in datesMap) {
-        const date = datesMap[k];
-        if (epochSeconds && date.epochSeconds > epochSeconds) {
-            continue;
-        }
-        if (date.confirmedCases === 0 && date.deathsNumber === 0 && map.size === 0) {
-            continue;
-        }
-        map.set(k, date);
-    }
-    return map;
-}
-
-function getData(lastDateStr, datesMap) {
-
-    const epochSeconds = lastDateStr ? new Date(lastDateStr).getTime() / 1000 : undefined;
-
-    const filtered = filterInitialDates(datesMap, epochSeconds);
-    const values = [...filtered.values()];
+function getData(datesMap) {
+    const values = [...datesMap.values()];
+    let totalC = 0;
+    let totalD = 0;
+    const confirmedList = values.map(v => v.confirmedCases);
+    const deathsList = values.map(v => v.deathsNumber);
     return {
-        labels: [...filtered.keys()],
+        labels: [...datesMap.keys()],
         datasets: [
-            { name: "Confirmed", values: values.map(v => v.confirmedCases) },
-            { name: "Deaths", values: values.map(v => v.deathsNumber) }
-        ]
+           // { name: "Confirmed Agg", values: values.map(v => (totalC = v.confirmedCases + totalC)) },
+            { name: "Confirmed", values: confirmedList },
+            { name: "Deaths", values: deathsList },
+            { name: "Deaths aggregated", values: deathsList.map(v => (totalD = v + totalD)) },
+        ],
+        totals: {
+            "Confirmed": confirmedList.reduce((a, b) => a + b),
+            "Deaths": deathsList.reduce((a, b) => a + b),
+        }
     };
 }
 </script>
@@ -41,12 +32,13 @@ function getData(lastDateStr, datesMap) {
 <style></style>
 
 <figure>
+    <slot></slot>
     <Chart
         data={data}
         type="line"
         axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
         lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} />
         <figcaption>
-            <slot></slot>
+        <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
         </figcaption>
 </figure>

@@ -1,7 +1,7 @@
 <script>
 import { onMount } from "svelte";
 import { store } from "../services/store";
-import { getIsoDate } from "../services/dates";
+import { getIsoDate, filterByDate } from "../services/dates";
 import CountrySelector from "../components/CountrySelector.svelte";
 import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
@@ -16,6 +16,8 @@ let dates = store.dates;
 let isFetching = false;
 let error = undefined;
 let lastDateStr;
+
+$: datesMap = filterByDate(dates, lastDateStr);
 
 onMount(async () => {
     try {
@@ -72,11 +74,11 @@ function handleCountryChange(c) {
     {#if country}
         <Stats
             caption='Totals'
-            data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
+            data={{ Confirmed: country.confirmedCases, Deaths: country.deathsNumber }} />
     {/if}
 
     {#if dates}
-        <TimeSerieChart datesMap={dates} lastDateStr={lastDateStr}>
+        <TimeSerieChart {datesMap} {lastDateStr}>
             <DatePicker bind:selected={lastDateStr} />
         </TimeSerieChart>
 
