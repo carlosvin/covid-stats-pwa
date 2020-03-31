@@ -13,12 +13,6 @@ const getSelectionLabel = ({countryName, value}) => {
 }
 const optionIdentifier = 'countryCode';
 
-
-/*let items = Object
-	.values(countries)
-	.sort((a, b) => a.countryName.localeCompare(b.countryName))
-	.map(c => ({value: c.countryCode, label: c.countryName}));*/
-
 function handleSelect ({detail}) {
 	dispatch('selected', detail);
 }
