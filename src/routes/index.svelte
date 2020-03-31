@@ -48,7 +48,7 @@ async function fetchDates(){
 function handleCountryChange(c) {
     country = c.detail;
     store.setCountry(country);
-    dates = undefined;//store.dates;
+    dates = undefined;
     fetchDates();
 }
 </script>
