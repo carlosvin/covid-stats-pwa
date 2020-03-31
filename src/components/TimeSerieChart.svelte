@@ -4,39 +4,30 @@ import Chart from 'svelte-frappe-charts';
 export let datesMap;
 export let caption = undefined;
 
-const dateEntries = convertToDateEntries(datesMap);
+filterInitial0Cases(datesMap);
+
+const values = Object.values(datesMap);
 const data = {
-    labels: dateEntries.map(p => new Date(p[0]).toDateString()),
+    labels: Object.keys(datesMap),
     datasets: [
-        { name: "Confirmed", values: dateEntries.map(d => d[1].confirmedCases) },
-        { name: "Deaths", values: dateEntries.map(d => d[1].deathsNumber) }
+        { name: "Confirmed", values: values.map(v => v.confirmedCases) },
+        { name: "Deaths", values: values.map(v => v.deathsNumber) }
     ]
 };
 
-function convertToDateEntries(datesMap){
-    return filterInitial0Cases(
-        convertMapToSortedList(datesMap));
-}
-
-function convertMapToSortedList (datesMap) {
-    return Object.values(datesMap).map(d => [new Date(d.date).getTime(), d]).sort();
-}
-
-function filterInitial0Cases(sortedDates){
-    const dates = [];
-    for (const d of sortedDates) {
-        if (d[1].confirmedCases > 0 || d[1].deathsNumber > 0 || dates.length > 0) {
-            dates.push(d);
+function filterInitial0Cases(datesMap){
+    for (const k in datesMap) {
+        const date = datesMap[k];
+        if (date.confirmedCases === 0 && date.deathsNumber === 0) {
+            delete datesMap[k];
+        } else {
+            return datesMap;
         }
     }
-    return dates;
 }
-
 </script>
 
-<style>
-
-</style>
+<style></style>
 
 <figure>
     <Chart
