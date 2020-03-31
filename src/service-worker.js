@@ -60,22 +60,27 @@ self.addEventListener('fetch', event => {
 
 	if (event.request.cache === 'only-if-cached') return;
 
-	// for everything else, try the network first, falling back to
-	// cache if the user is offline. (If the pages never change, you
-	// might prefer a cache-first approach to a network-first one.)
+	async function fetchFromNetwork(event, cache) {
+		const response = await fetch(event.request);
+		cache.put(event.request, response.clone());
+		return response;
+	}
+
+	// for everything else, try the cache first
 	event.respondWith(
 		caches
 			.open(`offline${timestamp}`)
 			.then(async cache => {
 				try {
-					const response = await fetch(event.request);
-					cache.put(event.request, response.clone());
-					return response;
-				} catch(err) {
 					const response = await cache.match(event.request);
-					if (response) return response;
-
-					throw err;
+					const networkPromise = fetchFromNetwork(event, cache);
+					if (response){ 
+						return response;
+					} else {
+						return (await networkPromise);
+					}
+				} catch(err) {
+					return (await fetchFromNetwork(event, cache));
 				}
 			})
 	);
