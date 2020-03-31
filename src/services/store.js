@@ -43,7 +43,12 @@ class Store {
 
     async fetchCountries () {
         if (!this._countries || this._isTooOld(this._countries.timestamp)) {
-            this._countries = {countries: await this._api.fetchCountries(), timestamp: new Date().getTime()};
+            const countries = await this._api.fetchCountries();
+            for (const code  in countries) {
+                const name = countries[code].countryName;
+                countries[code].countryName = name.replace("_", " ");
+            }
+            this._countries = {countries, timestamp: new Date().getTime()};
             this._save(KEYS.COUNTRIES, this._countries);
         }
         return this.countries;
