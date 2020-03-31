@@ -3,7 +3,7 @@ import {ApiClient} from './api';
 const KEYS = {
     COUNTRY: 'country',
     COUNTRIES: 'countries',
-    COUNTRIES_DATES: 'countries_dates',
+    DATES_BY_COUNTRY: 'dates_by_country',
 }; 
 
 class Store {
@@ -12,7 +12,7 @@ class Store {
         this._api = new ApiClient();
         this._lastCountry = this._read(KEYS.COUNTRY);
         this._countries = this._read(KEYS.COUNTRIES, {countries: undefined});
-        this._countriesDates = this._read(KEYS.COUNTRIES_DATES, {});
+        this._datesByCountry = this._read(KEYS.DATES_BY_COUNTRY, {});
     }
 
     get country () {
@@ -21,6 +21,14 @@ class Store {
 
     get countries () {
         return this._countries && this._countries.countries;
+    }
+
+    get dates(){
+        return this.country ? this.getDates(this.country.countryCode) : undefined;
+    }
+
+    getDates(countryCode) {
+        return countryCode in this._datesByCountry ? this._datesByCountry[countryCode].datesInfo : undefined;
     }
 
     /** @returns Country name if exists otherwise  it returns input code */
@@ -41,33 +49,12 @@ class Store {
         return this.countries;
     }
 
-    getCountryDate(countryCode, dateStr) {
-        if (countryCode in this._countriesDates) {
-            return this._countriesDates[countryCode].dates[dateStr];
+    async fetchDates(country) {
+        if (!(country in this._datesByCountry) || this._isTooOld(this._datesByCountry[country].timestamp)) {
+            this._datesByCountry[country] =  {datesInfo: await this._api.fetchCountryDates(country), timestamp: new Date().getTime()};
+            this._save(KEYS.DATES_BY_COUNTRY, this._datesByCountry);
         }
-        return undefined;
-    }
-
-    setCountryDate(countryCode, dateStr, date) {
-        if (countryCode in this._countriesDates) {
-            this._countriesDates[countryCode].dates[dateStr] = {...date, timestamp: new Date().getTime()};
-        } else {
-            this._countriesDates = {...this._countriesDates, 
-                [countryCode]: { 
-                    ...this._countriesDates[countryCode], 
-                    dates: {[dateStr]: {...date, timestamp: new Date().getTime()}}}
-            };
-        }
-    }
-
-    async fetchCountryDate (country, dateStr) {
-        let date = this.getCountryDate(country, dateStr);
-        if (!date || this._isTooOld(date.timestamp)) {
-            const date = await this._api.fetchCountryDate(country, dateStr);
-            this.setCountryDate(country, dateStr, date);
-            return date;
-        }
-        return date;
+        return this._datesByCountry[country].datesInfo;
     }
 
     _isTooOld(timestamp = 0) {

@@ -6,13 +6,13 @@ import CountrySelector from "../components/CountrySelector.svelte";
 import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
-import IconLink from "../components/IconLink.svelte";
+import TimeSerieChart from "../components/TimeSerieChart.svelte";
 import DatePicker from "../components/DatePicker.svelte";
 
 let countries = store.countries;
 let country = store.country;
-let dateStats = undefined;
-let selectedDateStr = getIsoDate();
+let dates = store.dates;
+
 let isFetching = false;
 let error = undefined;
 
@@ -28,23 +28,20 @@ onMount(async () => {
     if (countries && !country) {
         country = Object.values(countries)[0];
     }
-    fetchSelectedCountryDate();
+    fetchDates();
 });
 
-async function fetchSelectedCountryDate(){
+async function fetchDates(){
     isFetching = true;
     error = undefined;
     try {
-        dateStats = await store.fetchCountryDate(
-            country.countryCode,
-            selectedDateStr
-        );
+        dates = await store.fetchDates(country.countryCode);
     } catch (e) {
         if (e.status === 404) {
-            error = `There is no information for ${country.countryName} on ${selectedDateStr}`;
+            error = `There is no information for ${country.countryName}`;
         }
-        dateStats = undefined;
-        console.log(e);
+        dates = undefined;
+        console.warn(e);
     }
     isFetching = false;
 }
@@ -52,13 +49,8 @@ async function fetchSelectedCountryDate(){
 function handleCountryChange(c) {
     country = c.detail;
     store.setCountry(country);
-    dateStats = undefined;
-    fetchSelectedCountryDate();
-}
-
-function handleDateChange(ev) {
-    selectedDateStr = ev.detail;
-    fetchSelectedCountryDate();
+    dates = undefined;//store.dates;
+    fetchDates();
 }
 </script>
 
@@ -77,21 +69,15 @@ function handleDateChange(ev) {
             on:selected={handleCountryChange} />
     {/if}
     {#if country}
-        <IconLink 
-            href={country.path}
-            rel='prefetch'
-            src='/bar_chart-24px.svg'
-            title='Chart for {country.countryName}'/>
         <Stats
             caption='Totals'
             data={{ Deaths: country.deathsNumber, Confirmed: country.confirmedCases }} />
-        <DatePicker on:dateChanged={handleDateChange} />
     {/if}
 
-    {#if dateStats}
-        <Stats
-            caption={dateStats.date}
-            data={{ Deaths: dateStats.deathsNumber, Confirmed: dateStats.confirmedCases }} />
+    {#if dates}
+        <TimeSerieChart
+            caption={country.countryName}
+            datesMap={dates} />
     {/if}
 
     <Error msg={error}/>
