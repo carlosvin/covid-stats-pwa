@@ -1,22 +1,38 @@
 <script>
-import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher} from 'svelte';
+import Select from 'svelte-select';
+
 const dispatch = createEventDispatcher();
 
-function selected (e) {
-	dispatch('selected', countries[e.target.value]);
-}
+export let countries;
+export let country;
 
-export let countries = undefined;
-export let countryCode = undefined;
+const getOptionLabel = ({countryName}) => (countryName);
+const getSelectionLabel = ({countryName, value}) => {
+	return countryName || countries[value].countryName;
+}
+const optionIdentifier = 'countryCode';
+
+
+/*let items = Object
+	.values(countries)
+	.sort((a, b) => a.countryName.localeCompare(b.countryName))
+	.map(c => ({value: c.countryCode, label: c.countryName}));*/
+
+function handleSelect ({detail}) {
+	dispatch('selected', detail);
+}
 </script>
 
 <style>
 </style>
 
-{#if countries}
-	<select bind:value={countryCode} on:change={selected}>
-		{#each [...Object.values(countries).sort((a, b) => a.countryName.localeCompare(b.countryName))] as c}
-			<option value={c.countryCode}>{c.countryName}</option>
-		{/each}
-	</select>
+{#if countries && country}
+	<Select items={Object.values(countries)} 
+		{optionIdentifier}
+		selectedValue={country} 
+		{getSelectionLabel}
+		{getOptionLabel}
+		isClearable={false} 
+		on:select={handleSelect}/>
 {/if}

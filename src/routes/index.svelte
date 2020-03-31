@@ -7,7 +7,6 @@ import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
 import TimeSerieChart from "../components/TimeSerieChart.svelte";
-import DatePicker from "../components/DatePicker.svelte";
 
 let countries = store.countries;
 let country = store.country;
@@ -64,7 +63,7 @@ function handleCountryChange(c) {
 <svelte>
     {#if countries}
         <CountrySelector
-            countryCode={country && country.countryCode}
+            {country}
             {countries}
             on:selected={handleCountryChange} />
     {/if}
