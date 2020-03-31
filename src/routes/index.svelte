@@ -7,6 +7,7 @@ import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
 import TimeSerieChart from "../components/TimeSerieChart.svelte";
+import DatePicker from "../components/DatePicker.svelte";
 
 let countries = store.countries;
 let country = store.country;
@@ -14,6 +15,7 @@ let dates = store.dates;
 
 let isFetching = false;
 let error = undefined;
+let lastDateStr;
 
 onMount(async () => {
     try {
@@ -74,9 +76,10 @@ function handleCountryChange(c) {
     {/if}
 
     {#if dates}
-        <TimeSerieChart
-            caption={country.countryName}
-            datesMap={dates} />
+        <TimeSerieChart datesMap={dates} lastDateStr={lastDateStr}>
+            <DatePicker bind:selected={lastDateStr} />
+        </TimeSerieChart>
+
     {/if}
 
     <Error msg={error}/>
