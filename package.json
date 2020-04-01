@@ -12,8 +12,8 @@
     "test": "run-p --race dev cy:run",
     "serve:export": "serve  __sapper__/export"
   },
-  "bugs":{ 
-    "url" : "https://github.com/carlosvin/covid-stats-pwa/issues"
+  "bugs": {
+    "url": "https://github.com/carlosvin/covid-stats-pwa/issues"
   },
   "author": {
     "email": "carlosvin@gmail.com",
@@ -51,5 +51,14 @@
     "svelte": "^3.0.0",
     "svelte-select": "^3.6.2"
   },
-  "keywords": ["PWA", "COVID", "COVID-19", "Stats", "Statistics", "Charting", "Charts", "Time series"]
+  "keywords": [
+    "PWA",
+    "COVID",
+    "COVID-19",
+    "Stats",
+    "Statistics",
+    "Charting",
+    "Charts",
+    "Time series"
+  ]
 }
