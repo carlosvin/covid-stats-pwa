@@ -6,7 +6,9 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
-import analyze from 'rollup-plugin-analyzer'
+import analyze from 'rollup-plugin-analyzer';
+import json from '@rollup/plugin-json';
+
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -19,13 +21,11 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			json(),
 			analyze({summaryOnly: true}),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode),
-				'app.version': pkg.version,
-				'app.name': pkg.name,
-				'app.description': pkg.description,
 			}),
 			svelte({
 				dev,
@@ -67,6 +67,7 @@ export default {
 		input: config.server.input(),
 		output: config.server.output(),
 		plugins: [
+			json(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -91,6 +92,7 @@ export default {
 		input: config.serviceworker.input(),
 		output: config.serviceworker.output(),
 		plugins: [
+			json(),
 			resolve(),
 			replace({
 				'process.browser': true,

@@ -1,8 +1,17 @@
 <script>
 	import Nav from '../components/Nav.svelte';
+	import {keywords} from '../../package.json';
 
 	export let segment;
+
+	const date = new Date();
 </script>
+
+<svelte:head>
+	<meta name="keywords" content="{keywords}"/>
+	<meta name="robots" content="index,follow" />
+	<meta name="revised" content="{date.toISOString()}" />
+</svelte:head>
 
 <style>
 	main {

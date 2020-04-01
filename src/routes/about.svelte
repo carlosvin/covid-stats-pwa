@@ -1,4 +1,6 @@
 <script>
+import {version, description, name as appName, keywords, bugs, respository} from '../../package.json';
+import {name} from '../../static/manifest.json';
 </script>
 
 <style>
@@ -17,14 +19,15 @@ footer {
 </style>
 
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="app.description">
+	<title>About {name}</title>
+	<meta name="description" content="{description}"/>
+	<meta name="subject" content="{description}">
 </svelte:head>
 
-<h1>COVID 19 Stats</h1>
-<h2>app.name - app.version</h2>
-<p>app.description.</p>
+<h1>{name}</h1>
+<h2>{appName} - {version}</h2>
+<p>{description}.</p>
 <p>All the information is fetched from <a href="http://covid-rest.appspot.com/docs/index.html">REST API</a> exposing data from  <a href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">ECDC</a>.</p>
 <footer>
-<p>This is Open Source project, you can find the source code at: <a href="https://github.com/carlosvin/covid-stats-pwa">https://github.com/carlosvin/covid-stats-pwa</a></p>
+<p>This is Open Source project: <a href="{respository.url}">Source code</a> | <a href="{bugs.url}">Issues</a></p>
 </footer>
