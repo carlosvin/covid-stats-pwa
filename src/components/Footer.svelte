@@ -8,7 +8,7 @@
     position: fixed;
     bottom: 0;
     margin-bottom: 0;
-    background: rgb(240, 240, 240);
+    background: rgba(70,3,33, 0.05);
     color: gray;
     width: 100%;
     display: flex;

@@ -2,6 +2,7 @@
   "name": "covid-stats-pwa",
   "description": "PWA to monitor COVID-19 statistics",
   "version": "0.0.1",
+  "homepage": "https://covid-stats-pwa.netlify.app",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",

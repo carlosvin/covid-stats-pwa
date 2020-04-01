@@ -1,6 +1,7 @@
 <script>
 import Chart from 'svelte-frappe-charts';
 import Stats from './Stats.svelte';
+import { COLORS } from '../constants';
 
 export let datesMap;
 export let lastDateStr;
@@ -37,7 +38,9 @@ function getData(datesMap) {
         data={data}
         type="line"
         axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
-        lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} />
+        lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} 
+        colors={[...COLORS]}
+        />
         <figcaption>
             <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
         </figcaption>
