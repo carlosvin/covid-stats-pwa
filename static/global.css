@@ -38,3 +38,18 @@ code {
 figure {
 	margin: 0 auto;
 }
+
+input, dl, select {
+	border: 1px solid #d8dbdf;
+	border-radius: 4px;
+	box-sizing: border-box;
+	padding: 0.4em;
+}
+
+input:focus, select:focus {
+	border-color: #006fe8;
+}
+
+input:hover, select:focus {
+	border-color: #b2b8bf;
+}
