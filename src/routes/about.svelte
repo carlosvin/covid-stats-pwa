@@ -1,5 +1,5 @@
 <script>
-import {version, description, name as appName, keywords, bugs, respository} from '../../package.json';
+import {version, description, name as appName, keywords, bugs, repository} from '../../package.json';
 import {name} from '../../static/manifest.json';
 </script>
 
@@ -29,5 +29,5 @@ footer {
 <p>{description}.</p>
 <p>All the information is fetched from <a href="http://covid-rest.appspot.com/docs/index.html">REST API</a> exposing data from  <a href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">ECDC</a>.</p>
 <footer>
-<p>This is Open Source project: <a href="{respository.url}">Source code</a> | <a href="{bugs.url}">Issues</a></p>
+<p>This is Open Source project: <a href="{repository.url}">Source code</a> | <a href="{bugs.url}">Issues</a></p>
 </footer>
