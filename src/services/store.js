@@ -23,7 +23,7 @@ class Store {
         return this._countries && this._countries.countries;
     }
 
-    get dates(){
+    get dates() {
         return this.country ? this.getDates(this.country.countryCode) : undefined;
     }
 
@@ -49,9 +49,18 @@ class Store {
                 countries[code].countryName = name.replace("_", " ");
             }
             this._countries = {countries, timestamp: new Date().getTime()};
+            this._reloadCountryData();
             this._save(KEYS.COUNTRIES, this._countries);
         }
         return this.countries;
+    }
+
+    _reloadCountryData() {
+        if (this._lastCountry) {
+            this.setCountry(this.countries[this._lastCountry.countryCode]);
+        } else {
+            this.setCountry(Object.values(this.countries)[0]);
+        }
     }
 
     async fetchDates(country) {

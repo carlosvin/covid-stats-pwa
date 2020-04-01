@@ -28,9 +28,7 @@ onMount(async () => {
         console.warn(e);
     }
     isFetching = false;
-    if (countries && !country) {
-        country = Object.values(countries)[0];
-    }
+    country = store.country;
     fetchDates();
 });
 

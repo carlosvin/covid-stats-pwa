@@ -1,7 +1,7 @@
 
 export class Url {
 
-    constructor(base = 'https://covid-rest.appspot.com'){
+    constructor(base){
         this._base = base;
     }
 
