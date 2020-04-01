@@ -1,5 +1,6 @@
 <script>
 	import Nav from '../components/Nav.svelte';
+	import Footer from '../components/Footer.svelte';
 	import {keywords} from '../../package.json';
 
 	export let segment;
@@ -19,7 +20,10 @@
 		max-width: 56em;
 		background-color: white;
 		padding: 2em;
-		margin: 0 auto;
+		margin-top: 0;
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 1em;
 		box-sizing: border-box;
 		text-align: center;
 	}
@@ -30,3 +34,5 @@
 <main>
 	<slot></slot>
 </main>
+
+<Footer/>
