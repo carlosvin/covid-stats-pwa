@@ -3,6 +3,7 @@
 	"theme_color": "#460321",
 	"name": "COVID-19 Stats",
 	"short_name": "COVID stats",
+	"description": "PWA to monitor COVID-19 statistics by country and by date",
 	"display": "standalone",
 	"start_url": "/",
 	"icons": [
@@ -15,6 +16,17 @@
 			"src": "logo-512.png",
 			"sizes": "512x512",
 			"type": "image/png"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/screenshots/covid-stats-pwa.netlify.app_(desktop).png"
+		},
+		{
+			"src": "/screenshots/covid-stats-pwa.netlify.app_(iPad).png"
+		},
+		{
+			"src": "/screenshots/covid-stats-pwa.netlify.app_(iPhone%206_7_8).png"
 		}
 	]
 }
