@@ -73,14 +73,13 @@ self.addEventListener('fetch', event => {
 			.then(async cache => {
 				try {
 					const response = await cache.match(event.request);
-					const networkPromise = fetchFromNetwork(event, cache);
 					if (response){ 
 						return response;
 					} else {
-						return (await networkPromise);
+						return fetchFromNetwork(event, cache);
 					}
 				} catch(err) {
-					return (await fetchFromNetwork(event, cache));
+					return fetchFromNetwork(event, cache);
 				}
 			})
 	);
