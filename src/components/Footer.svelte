@@ -25,7 +25,8 @@
 
 <footer>
   <span>
-    <strong>{name}</strong> is Open Source project:
+    <strong>{name}</strong>
+    is Open Source project:
     <a href={repository.url}>Source code</a>
     |
     <a href={bugs.url}>Issues</a>

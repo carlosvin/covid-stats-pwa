@@ -7,7 +7,7 @@ export let caption = undefined;
     dl {
         display: flex;
         flex-flow: row wrap;
-        border: 1px solid #ccc;
+        border: 1px dotted #d8dbdf;
     }
     dt {
         flex-basis: 20%;
