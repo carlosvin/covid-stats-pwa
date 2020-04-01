@@ -16,10 +16,15 @@
 
 <style>
 	main {
-		position: relative;
-		max-width: 56em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-flow: column;
+		justify-content: start;
+		justify-items: flex-start;
+		
+		width: 100%;
 		background-color: white;
-		padding: 2em;
+		padding: 2rem;
 		margin-top: 0;
 		margin-left: 0;
 		margin-right: 0;
