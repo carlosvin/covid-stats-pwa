@@ -12,11 +12,9 @@
 <style>
   main {
     display: flex;
-    flex-wrap: wrap;
-    flex-flow: column;
-    justify-content: start;
-    justify-items: flex-start;
-
+    justify-content: flex-start;
+    justify-items: stretch;
+    flex-direction: column;
     width: 100%;
     min-height: calc(100vh - 90px);
     background-color: white;
@@ -24,6 +22,11 @@
     margin: 0 auto;
     box-sizing: border-box;
     text-align: center;
+  }
+
+  main > * {
+    display: flex;
+    flex-direction: row;
   }
 </style>
 

@@ -32,16 +32,14 @@ function getData(datesMap) {
 
 <style></style>
 
-<figure>
-    <slot></slot>
-    <Chart
-        data={data}
-        type="line"
-        axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
-        lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} 
-        colors={[...COLORS, "red", "blue"]}
-        />
-        <figcaption>
-            <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
-        </figcaption>
-</figure>
+<div>
+<Chart
+    data={data}
+    type="line"
+    axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
+    lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} 
+    colors={[...COLORS, "red", "blue"]}
+    />
+<Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
+
+</div>

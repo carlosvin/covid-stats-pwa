@@ -1,6 +1,6 @@
 <script>
 import { createEventDispatcher} from 'svelte';
-import Error from './Error.svelte';
+import Input from './Input.svelte';
 
 const dispatch = createEventDispatcher();
 
@@ -13,8 +13,8 @@ $: id = `countries${idSuffix}`;
 $: idData = `countries${idSuffix}-data`;
 $: values = Object.values(countries);
 
-function handleChange (ev) {
-	const code = ev.target.value;
+function handleChange ({target}) {
+	const code = target.value;
 	if (code) {
 		if (code in countries) {
 			dispatch('selected', countries[code]);
@@ -24,7 +24,6 @@ function handleChange (ev) {
 	} else {
 		error = `Required`;
 	}
-	
 }
 
 function handleInput (ev) {
@@ -32,26 +31,18 @@ function handleInput (ev) {
 }
 </script>
 
-<style>
-</style>
-
 {#if countries && country}
-	<input {id} name={id} list={idData} 
-		value={country.countryName} 
-		type="search"
-		on:change={handleChange}
-		on:input={handleInput}
-		required/>
-	<datalist id={idData}>
-		{#each values as {countryCode, countryName}}
-			<option value={countryCode} >{countryName}</option>
-		{/each}
-	</datalist>
-	<label for={id}>
-		{#if error}
-			<Error msg={error}/>
-		{:else}
-			Countries
-		{/if}
-	</label>
+	<Input label="Countries" {id} {error}>
+		<input {id} name={id} list={idData} 
+			bind:value={country.countryName} 
+			type="search"
+			on:change={handleChange}
+			on:input={handleInput}
+			required/>
+		<datalist id={idData}>
+			{#each values as {countryCode, countryName}}
+				<option value={countryCode} >{countryName}</option>
+			{/each}
+		</datalist>
+	</Input>
 {/if}

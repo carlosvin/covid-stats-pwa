@@ -7,11 +7,9 @@ export let caption = undefined;
     dl {
         display: flex;
         flex-flow: row wrap;
-        border-style: dotted;
+        margin: 0;
     }
     dt {
-        flex-basis: 20%;
-        padding: 2px 4px;
         text-align: right;
         font-weight: bold;
     }
@@ -21,7 +19,13 @@ export let caption = undefined;
     dd {
         flex-grow: 1;
         margin: 0;
-        padding: 2px 4px;
+    }
+    figcaption {
+        margin-left: -0.6em;
+        margin-top: 0.6em;
+    }
+    figure {
+        margin-bottom: 0.6em;
     }
 </style>
 

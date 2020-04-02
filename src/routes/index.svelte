@@ -47,16 +47,13 @@ async function fetchDates(){
     isFetching = false;
 }
 
-function handleCountryChange(c) {
-    country = c.detail;
+function handleCountryChange({detail}) {
+    country = detail;
     store.setCountry(country);
     dates = undefined;
     fetchDates();
 }
 </script>
-
-<style>
-</style>
 
 <svelte:head>
   <title>COVID-19 cases</title>
@@ -69,17 +66,18 @@ function handleCountryChange(c) {
             {countries}
             on:selected={handleCountryChange} />
     {/if}
+
+    <DatePicker bind:selected={lastDateStr} />
+
     {#if country}
         <Stats
             caption='Totals'
             data={{ Confirmed: country.confirmedCases, Deaths: country.deathsNumber }} />
     {/if}
+    
 
     {#if dates}
-        <TimeSerieChart {datesMap} {lastDateStr}>
-            <DatePicker bind:selected={lastDateStr} />
-        </TimeSerieChart>
-
+        <TimeSerieChart {datesMap} {lastDateStr}/>
     {/if}
 
     <Error msg={error}/>
