@@ -1121,9 +1121,9 @@ define-properties@^1.1.2, define-properties@^1.1.3:
     object-keys "^1.0.12"
 
 electron-to-chromium@^1.3.390:
-  version "1.3.392"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.392.tgz#280ab4f7a3ae47419cfabb15dbfc1567be7f1111"
-  integrity sha512-/hsgeVdReDsyTBE0aU9FRdh1wnNPrX3xlz3t61F+CJPOT+Umfi9DXHsCX85TEgWZQqlow0Rw44/4/jbU2Sqgkg==
+  version "1.3.393"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.393.tgz#d13fa4cbf5065e18451c84465d22aef6aca9a911"
+  integrity sha512-Ko3/VdhZAaMaJBLBFqEJ+M1qMiBI8sJfPY/hSJvDrkB3Do8LJsL9tmXy4w7o9nPXif/jFaZGSlXTQWU8XVsYtg==
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -1898,9 +1898,9 @@ safe-buffer@^5.0.1:
   integrity sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
 
 sapper@^0.27.0:
-  version "0.27.11"
-  resolved "https://registry.yarnpkg.com/sapper/-/sapper-0.27.11.tgz#46877abe8a386bee62b9decfe9932fe37f5464f7"
-  integrity sha512-5EaPZhlc8OnyN3UCI6dRSM1Gz5sxyzLZG/1z5nMvZhg9Ng+rSvEvJx/rW/tSHcnQPa8or7+YcbfvQHKS5oPHiw==
+  version "0.27.12"
+  resolved "https://registry.yarnpkg.com/sapper/-/sapper-0.27.12.tgz#7c72cd878ed4ca07f8b070ee952f66c2947f58c8"
+  integrity sha512-xTvPQMb9L3J34Jd+6jSFeiuT8eQZ2D5TXPeJI9VO7h8t5nB2w78ZNQ4IlEPHsCMT2LZNLozygTb2plE4qH2XeQ==
   dependencies:
     html-minifier "^4.0.0"
     http-link-header "^1.0.2"
@@ -2139,11 +2139,6 @@ svelte-frappe-charts@^1.1.0:
   dependencies:
     frappe-charts "1.3.0"
     svelte "^3.20.0"
-
-svelte-select@^3.6.2:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/svelte-select/-/svelte-select-3.6.2.tgz#aa1959609fa68a3689ec5052ee041ca24e794f33"
-  integrity sha512-6n1NbL1D5Lb8iLEUawYcaYNGPw84y4ZV52ysON4bvh2OlYZX3MtUlUEPuPpnIXiVNaNw2D294XjZ5bCnemxp8w==
 
 svelte@^3.0.0, svelte@^3.20.0:
   version "3.20.1"
