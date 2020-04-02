@@ -2,11 +2,11 @@
 export let msg = undefined;
 </script>
 <style>
-    p {
+    span {
         color: brown;
     }
 </style>
 
 {#if msg}
-    <p>{msg}</p>
+    <span>{msg}</span>
 {/if}

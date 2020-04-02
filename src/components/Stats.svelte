@@ -23,13 +23,6 @@ export let caption = undefined;
         margin: 0;
         padding: 2px 4px;
     }
-    figcaption {
-        margin-top: -0.9rem;
-        font-size: smaller;
-        padding-right: 0.2rem;
-        text-align: right;
-        color: rgb(89, 89, 89);
-    }
 </style>
 
 <figure>

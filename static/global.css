@@ -53,3 +53,11 @@ input:focus, select:focus {
 input:hover, select:focus {
 	border-color: #b2b8bf;
 }
+
+label, figcaption {
+	margin-top: -0.9rem;
+	font-size: 0.8em;
+	padding-right: 0.2rem;
+	text-align: right;
+	color: rgb(89, 89, 89);
+}

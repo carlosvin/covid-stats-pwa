@@ -22,4 +22,4 @@ $: id = `when-${idSuffix}`;
     min={min}
     max={today}
     aria-label="Choose the end date for the time serie" />
-<label for={id}>End time series date</label>
+<label for={id}>End date</label>
