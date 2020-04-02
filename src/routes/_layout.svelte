@@ -16,7 +16,7 @@
     justify-items: stretch;
     flex-direction: column;
     width: 100%;
-    min-height: calc(100vh - 90px);
+    min-height: calc(100vh - 50px);
     background-color: white;
     padding: 2rem;
     margin: 0 auto;
