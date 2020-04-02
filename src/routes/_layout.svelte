@@ -20,10 +20,7 @@
     width: 100%;
     background-color: white;
     padding: 2rem;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 1em;
+    margin-top: 0 auto;
     box-sizing: border-box;
     text-align: center;
   }
