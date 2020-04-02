@@ -10,8 +10,8 @@ class Store {
 
     constructor() {
         this._api = new ApiClient();
-        this._lastCountry = this._read(KEYS.COUNTRY);
         this._countries = this._read(KEYS.COUNTRIES, {countries: undefined});
+        this._lastCountry = this._read(KEYS.COUNTRY, this.firstCountry);
         this._datesByCountry = this._read(KEYS.DATES_BY_COUNTRY, {});
     }
 
@@ -59,8 +59,12 @@ class Store {
         if (this._lastCountry) {
             this.setCountry(this.countries[this._lastCountry.countryCode]);
         } else {
-            this.setCountry(Object.values(this.countries)[0]);
+            this.setCountry(this.firstCountry);
         }
+    }
+
+    get firstCountry () {
+        return this.countries ? Object.values(this.countries)[0] : undefined;
     }
 
     async fetchDates(country) {
@@ -84,8 +88,10 @@ class Store {
     _read(key, def = undefined) {
         if (typeof localStorage !== 'undefined') {
             const valueStr = localStorage.getItem(key);
-            return valueStr ? JSON.parse(valueStr) : def;
+            const value = valueStr ? JSON.parse(valueStr) : undefined;
+            return value ? value : def;
         }
+        return def;
     }
 }
 
