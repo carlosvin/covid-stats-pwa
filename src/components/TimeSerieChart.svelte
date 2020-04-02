@@ -39,7 +39,7 @@ function getData(datesMap) {
         type="line"
         axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
         lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }} 
-        colors={[...COLORS, "red", "brown"]}
+        colors={[...COLORS, "red", "blue"]}
         />
         <figcaption>
             <Stats data={data.totals} caption={`Totals on ${lastDateStr}`}/>
