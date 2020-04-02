@@ -4,6 +4,11 @@ import { getIsoDate } from "../services/dates";
 
 export let today = getIsoDate();
 export let selected = getIsoDate();
+export let idSuffix = "";
+export let min = "2019-12-01";
+
+$: id = `when-${idSuffix}`;
+
 </script>
 
 <style>
@@ -11,8 +16,10 @@ export let selected = getIsoDate();
 
 <input
     type="date"
-    id="when"
-    name="when"
+    {id}
+    name={id}
     bind:value={selected}
-    min="2019-12-01"
-    max={today} />
+    min={min}
+    max={today}
+    aria-label="Choose the end date for the time serie" />
+<label for={id}>End time series date</label>
