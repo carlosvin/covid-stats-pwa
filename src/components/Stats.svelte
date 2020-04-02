@@ -28,7 +28,7 @@ export let caption = undefined;
         font-size: smaller;
         padding-right: 0.2rem;
         text-align: right;
-        color: rgb(120, 120, 120);
+        color: rgb(89, 89, 89);
     }
 </style>
 
