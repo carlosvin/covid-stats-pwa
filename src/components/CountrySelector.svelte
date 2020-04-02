@@ -6,15 +6,19 @@ const dispatch = createEventDispatcher();
 
 export let countries;
 export let country;
+export let idSuffix = '';
 
-const getOptionLabel = ({countryName}) => (countryName);
-const getSelectionLabel = ({countryName, value}) => {
-	return countryName || countries[value].countryName;
+$: id = `countries${idSuffix}`;
+$: idData = `countries${idSuffix}-data`;
+$: values = Object.values(countries);
+
+function handleSelect (ev) {
+	dispatch('selected', countries[ev.target.value]);
 }
-const optionIdentifier = 'countryCode';
 
-function handleSelect ({detail}) {
-	dispatch('selected', detail);
+
+function handleSelect2 (ev) {
+	console.log(ev);
 }
 </script>
 
@@ -22,11 +26,12 @@ function handleSelect ({detail}) {
 </style>
 
 {#if countries && country}
-	<Select items={Object.values(countries)} 
-		{optionIdentifier}
-		selectedValue={country} 
-		{getSelectionLabel}
-		{getOptionLabel}
-		isClearable={false} 
-		on:select={handleSelect}/>
+	<input {id} list={idData} name={id} on:change={handleSelect} on:select={handleSelect2} value={country.countryName} type="search" required>
+	<datalist id={idData}>
+		{#each values as {countryCode, countryName}}
+			<option 
+				value={countryCode} >{countryName}</option>
+		{/each}
+	</datalist>
+	<label for={id}>Countries</label>
 {/if}
