@@ -44,6 +44,8 @@ input, dl, select {
 	border-radius: 4px;
 	box-sizing: border-box;
 	padding: 0.4em;
+	height: 2.5em;
+	width: 100%;
 }
 
 input:focus, select:focus {
@@ -54,9 +56,15 @@ input:hover, select:focus {
 	border-color: #b2b8bf;
 }
 
+input:required::after {
+    content:" *";
+	color: brown;
+	background-color: red;
+}
+
 label, figcaption {
 	margin-top: -0.9rem;
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	padding-right: 0.2rem;
 	text-align: right;
 	color: rgb(89, 89, 89);

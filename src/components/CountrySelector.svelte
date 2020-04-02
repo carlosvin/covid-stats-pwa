@@ -15,11 +15,16 @@ $: values = Object.values(countries);
 
 function handleChange (ev) {
 	const code = ev.target.value;
-	if (code in countries) {
-		dispatch('selected', countries[code]);
+	if (code) {
+		if (code in countries) {
+			dispatch('selected', countries[code]);
+		} else {
+			error = `Invalid selected country code: "${code}"`;
+		}
 	} else {
-		error = `Invalid selected country code: "${code}"`;
+		error = `Required`;
 	}
+	
 }
 
 function handleInput (ev) {
