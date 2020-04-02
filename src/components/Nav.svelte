@@ -15,7 +15,6 @@
 <style>
 	nav {
 		border-bottom: 1px solid rgba(221,94,75,0.1);
-		font-weight: 300;
 		padding: 0 1em;
 		display: flex;
 		flex-flow: row;

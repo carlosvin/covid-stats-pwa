@@ -18,9 +18,10 @@
     justify-items: flex-start;
 
     width: 100%;
+    min-height: calc(100vh - 90px);
     background-color: white;
     padding: 2rem;
-    margin-top: 0 auto;
+    margin: 0 auto;
     box-sizing: border-box;
     text-align: center;
   }

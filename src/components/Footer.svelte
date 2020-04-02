@@ -9,7 +9,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color:rgba(70,3,33, 0.05);
+    background-color: rgba(70, 3, 33, 0.05);
     color: white;
     text-align: center;
     color: gray;
@@ -19,10 +19,8 @@
     flex-flow: wrap;
     justify-items: center;
     justify-content: space-around;
-    
   }
 
- 
   span {
     padding: 0.4em;
   }
