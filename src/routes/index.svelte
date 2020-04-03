@@ -70,8 +70,8 @@ function handleCountryChange({detail}) {
 
 @media screen and (max-width: 420px) {
   .grid-container-row {
-    grid-gap: 2%;
-    grid-template-columns: 35% auto;
+    grid-gap: 1%;
+    grid-template-columns: 40% auto;
   }
 }
 
