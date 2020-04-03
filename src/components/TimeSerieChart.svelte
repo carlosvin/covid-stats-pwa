@@ -1,12 +1,16 @@
 <script>
 import Chart from 'svelte-frappe-charts';
 import Stats from './Stats.svelte';
+import DatePicker from './DatePicker.svelte';
+import { filterByDate } from '../services/dates';
 import { COLORS } from '../constants';
 
-export let datesMap;
+export let dates;
 export let lastDateStr;
 
+$: datesMap = filterByDate(dates, lastDateStr);
 $: data = getData(datesMap);
+
 
 function getData(datesMap) {
     const values = [...datesMap.values()];
@@ -33,6 +37,8 @@ function getData(datesMap) {
 <style></style>
 
 <div>
+<DatePicker bind:selected={lastDateStr} />
+
 <Chart
     data={data}
     type="line"

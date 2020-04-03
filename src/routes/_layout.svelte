@@ -24,10 +24,6 @@
     text-align: center;
   }
 
-  main > * {
-    display: flex;
-    flex-direction: row;
-  }
 </style>
 
 <svelte:head>

@@ -1,13 +1,14 @@
 <script>
 import { onMount } from "svelte";
 import { store } from "../services/store";
-import { getIsoDate, filterByDate } from "../services/dates";
+import { getIsoDate } from "../services/dates";
 import CountrySelector from "../components/CountrySelector.svelte";
 import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
 import TimeSerieChart from "../components/TimeSerieChart.svelte";
 import DatePicker from "../components/DatePicker.svelte";
+import Flex from "../components/Flex.svelte";
 
 let countries = store.countries;
 let country = store.country;
@@ -16,8 +17,6 @@ let dates = store.dates;
 let isFetching = false;
 let error = undefined;
 let lastDateStr;
-
-$: datesMap = filterByDate(dates, lastDateStr);
 
 onMount(async () => {
     try {
@@ -55,29 +54,54 @@ function handleCountryChange({detail}) {
 }
 </script>
 
+<style>
+.grid-container-row {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-self: stretch;
+    grid-gap: 1rem;
+}
+
+.grid-container-col {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media screen and (max-width: 400px) {
+  .grid-container-row {
+    display: block;
+  }
+
+  .countries {
+    margin-bottom: 1em;
+  }
+}
+
+</style>
+
 <svelte:head>
   <title>COVID-19 cases</title>
 </svelte:head>
 
-<svelte>
-    {#if countries}
-        <CountrySelector
-            {country}
-            {countries}
-            on:selected={handleCountryChange} />
-    {/if}
+<div class='grid-container-col'>
+    <div class='grid-container-row'>
+        {#if countries}
+            <div class="countries">
+                <CountrySelector
+                    {country}
+                    {countries}
+                    on:selected={handleCountryChange} />
+            </div>
+        {/if}
 
-    <DatePicker bind:selected={lastDateStr} />
-
-    {#if country}
-        <Stats
-            caption='Totals'
-            data={{ Confirmed: country.confirmedCases, Deaths: country.deathsNumber }} />
-    {/if}
-    
+        {#if country}
+            <Stats caption='Totals'
+                data={{ Confirmed: country.confirmedCases, Deaths: country.deathsNumber }} />
+        {/if}
+    </div>
 
     {#if dates}
-        <TimeSerieChart {datesMap} {lastDateStr}/>
+        <TimeSerieChart {dates} {lastDateStr}/>
     {/if}
 
     <Error msg={error}/>
@@ -85,4 +109,4 @@ function handleCountryChange({detail}) {
     {#if isFetching}
         <p><Spinner>Fetching...</Spinner></p>
     {/if}
-</svelte>
+ </div>

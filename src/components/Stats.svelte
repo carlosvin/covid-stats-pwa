@@ -1,42 +1,39 @@
 <script>
+import StatEntry from './StatEntry.svelte';
+
 export let data = {};
 export let caption = undefined;
 </script>
 
 <style>
-    dl {
-        display: flex;
-        flex-flow: row wrap;
-        margin: 0;
-    }
-    dt {
-        text-align: right;
-        font-weight: bold;
-    }
-    dt::after {
-        content: ":";
-    }
-    dd {
-        flex-grow: 1;
-        margin: 0;
+    figure {
+        width: 100%;
+        border: 1px solid #d8dbdf;
+        border-radius: 4px;
+        text-align: center;
+        display: table;
+        margin:0 ;
     }
     figcaption {
-        margin-left: -0.6em;
-        margin-top: 0.6em;
+        display: table-cell;
+        vertical-align: middle;
+        font-size: smaller;
+        /*transform: rotate(-90deg);*/
     }
-    figure {
-        margin-bottom: 0.6em;
+    .entries {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 </style>
 
 <figure>
-    <dl>
-        {#each [...Object.entries(data)] as [key, value]}
-        <dt>{key}</dt>
-        <dd>{value}</dd>
-        {/each}
-    </dl>
     {#if caption}
         <figcaption>{caption}</figcaption>
     {/if}
+    <div class='entries'>
+    {#each [...Object.entries(data)] as [name, value]}
+        <StatEntry {name}>{value}</StatEntry>
+    {/each}
+    </div>
 </figure>
