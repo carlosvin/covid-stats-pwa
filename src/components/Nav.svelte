@@ -15,10 +15,12 @@
 <style>
 	nav {
 		border-bottom: 1px solid rgba(221,94,75,0.1);
-		padding: 0 1em;
+		padding-left: 1em;
+		padding-right: 1em;
 		display: flex;
 		flex-flow: row;
 		vertical-align: middle;
+		height: 3rem;
 	}
 
 	.offline {
@@ -46,6 +48,8 @@
 	li {
 		display: block;
 		float: left;
+		font-size: 1.4em;
+		height: 3rem;
 	}
 
 	[aria-current] {
@@ -53,19 +57,26 @@
 		display: inline-block;
 	}
 
-	[aria-current]::after {
+	[aria-current]::after, [aria-current]::before {
 		position: absolute;
 		content: '';
 		width: calc(100% - 1em);
 		height: 2px;
 		background-color: rgba(70,3,33, 0.156);
 		display: block;
-		bottom: -1px;
+	}
+
+	[aria-current]::after {
+		top: 3rem;
+	}
+
+	[aria-current]::before {
+		top: 0rem;
 	}
 
 	a {
 		text-decoration: none;
-		padding: 1em 0.5em;
+		padding: 0.3em 0.5em;
 		display: block;
 	}
 </style>
