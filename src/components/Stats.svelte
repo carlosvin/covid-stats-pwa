@@ -1,5 +1,5 @@
 <script>
-import StatEntry from './StatEntry.svelte';
+import StatEntry from './StatsEntry.svelte';
 
 export let data = {};
 export let caption = undefined;
