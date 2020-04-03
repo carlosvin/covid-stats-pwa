@@ -9,7 +9,7 @@ export let caption = undefined;
     figure {
         width: 100%;
         border: 1px solid #d8dbdf;
-        border-radius: 4px;
+        border-radius: 2px;
         text-align: center;
         display: table;
         margin:0 ;

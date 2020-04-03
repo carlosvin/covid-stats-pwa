@@ -16,6 +16,7 @@ export let error = undefined;
 label {
 	grid-row: 2 / 3;
 	text-align: left;
+	padding-left: 0.2em;
 }
 
 .input {

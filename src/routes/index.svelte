@@ -57,7 +57,7 @@ function handleCountryChange({detail}) {
 <style>
 .grid-container-row {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto auto;
     justify-self: stretch;
     grid-gap: 1rem;
 }
