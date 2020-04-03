@@ -67,7 +67,15 @@ function handleCountryChange({detail}) {
     grid-gap: 1rem;
 }
 
-@media screen and (max-width: 400px) {
+
+@media screen and (max-width: 420px) {
+  .grid-container-row {
+    grid-gap: 2%;
+    grid-template-columns: 35% auto;
+  }
+}
+
+@media screen and (max-width: 380px) {
   .grid-container-row {
     display: block;
   }
