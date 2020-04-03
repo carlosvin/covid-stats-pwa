@@ -42,6 +42,7 @@ input {
 	font-size: 1em;
 	padding: 0.2em;
 	width: 100%;
+	background-color: white;
 }
 label {
 	font-size: 0.8em;
