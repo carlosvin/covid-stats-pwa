@@ -18,7 +18,6 @@ export let caption = undefined;
         display: table-cell;
         vertical-align: middle;
         font-size: smaller;
-        /*transform: rotate(-90deg);*/
     }
     .entries {
         display: flex;
