@@ -57,9 +57,9 @@ function handleCountryChange({detail}) {
 <style>
 .grid-container-row {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 40% auto;
     justify-self: stretch;
-    grid-gap: 1rem;
+    grid-gap: 2%;
 }
 
 .grid-container-col {
@@ -67,15 +67,7 @@ function handleCountryChange({detail}) {
     grid-gap: 1rem;
 }
 
-
-@media screen and (max-width: 420px) {
-  .grid-container-row {
-    grid-gap: 1%;
-    grid-template-columns: 40% auto;
-  }
-}
-
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 520px) {
   .grid-container-row {
     display: block;
   }
