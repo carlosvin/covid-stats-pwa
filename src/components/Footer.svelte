@@ -14,12 +14,10 @@
     text-align: center;
     color: gray;
     font-size: smaller;
-
     display: flex;
     flex-flow: wrap;
     justify-items: center;
     justify-content: space-around;
-    height: 2rem;
   }
 
   span {

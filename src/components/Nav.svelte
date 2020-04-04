@@ -14,13 +14,10 @@
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(221,94,75,0.1);
-		padding-left: 1em;
-		padding-right: 1em;
 		display: flex;
 		flex-flow: row;
 		vertical-align: middle;
-		height: 3rem;
+		background-color: rgba(70,3,33, 0.156);
 	}
 
 	.offline {
@@ -49,29 +46,12 @@
 		display: block;
 		float: left;
 		font-size: 1.4em;
-		height: 3rem;
 	}
 
 	[aria-current] {
 		position: relative;
 		display: inline-block;
-	}
-
-	[aria-current]::after, [aria-current]::before {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgba(70,3,33, 0.156);
-		display: block;
-	}
-
-	[aria-current]::after {
-		top: 3rem;
-	}
-
-	[aria-current]::before {
-		top: 0rem;
+		background-color: rgba(255, 255,255, 0.8);
 	}
 
 	a {
@@ -85,10 +65,6 @@
 	<ul>
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
-		{#if segment === "countries" }
-		<li><a aria-current='{segment === "countries" ? "page" : undefined}' href='/'> {'< '}
-		</a></li>
-		{/if}
 	</ul>
 	{#if isOffline}
 		<p class='offline'>offline</p>

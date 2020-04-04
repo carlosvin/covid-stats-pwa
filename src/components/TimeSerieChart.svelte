@@ -11,7 +11,6 @@ export let lastDateStr;
 $: datesMap = filterByDate(dates, lastDateStr);
 $: data = getData(datesMap);
 
-
 function getData(datesMap) {
     const values = [...datesMap.values()];
     let totalC = 0;
