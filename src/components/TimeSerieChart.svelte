@@ -7,7 +7,6 @@
   import { localization } from "../services/localization";
 
   export let dates;
-  let lastDateStr = getIsoDate();
   let selectedStart;
   let selectedEnd;
   let loc;
@@ -51,15 +50,15 @@
     labelEnd={loc.get('End date')}
     titleStart={loc.get('Choose the start date for the time series')}
     titleEnd={loc.get('Choose the end date for the time series')} />
-
-  <Chart
-    data={getData(datesMap, loc)}
-    type="line"
-    axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
-    lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }}
-    colors={[...COLORS, 'red', 'blue']} />
-  <Stats
-    data={getData(datesMap, loc).totals}
-    caption={`${loc.get('Totals on')} ${loc.formatDate(new Date(lastDateStr))}`} />
-
+  {#if selectedStart && selectedEnd}
+    <Chart
+      data={getData(datesMap, loc)}
+      type="line"
+      axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
+      lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }}
+      colors={[...COLORS, 'red', 'blue']} />
+    <Stats
+      data={getData(datesMap, loc).totals}
+      caption={`${loc.formatDateStr(selectedStart)} → ${loc.formatDateStr(selectedEnd)}`} />
+  {/if}
 </div>
