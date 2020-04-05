@@ -27,6 +27,8 @@ const translations = {
         ECDC
         </a>`,
     'App description': 'App to monitor COVID-19 statistics by country and by date',
+    'Invalid range': 'Invalid range',
+
 };
 
 export default translations;

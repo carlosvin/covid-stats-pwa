@@ -3,8 +3,8 @@
   import Stats from "./Stats.svelte";
   import DateRange from "./DateRange.svelte";
   import { filterByDate, getIsoDate } from "../services/dates";
-  import { localization } from "../services/localization";
   import { COLORS } from "../constants";
+  import { localization } from "../services/localization";
 
   export let dates;
   let lastDateStr = getIsoDate();

@@ -28,6 +28,7 @@ const translations = {
         ECDC
         </a>`,
     'App description': 'Aplicación para monitorizar las estadísticas del COVID-19 por país y por fecha',
+    'Invalid range': 'Rango inválido',
 };
 
 export default translations;
