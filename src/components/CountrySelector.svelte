@@ -1,6 +1,10 @@
 <script>
 import { createEventDispatcher} from 'svelte';
 import Input from './Input.svelte';
+import { localization } from '../services/localization';
+
+let loc;
+const unsubscribe = localization.subscribe(value => loc = value);
 
 const dispatch = createEventDispatcher();
 
@@ -19,10 +23,10 @@ function handleChange ({target}) {
 		if (code in countries) {
 			dispatch('selected', countries[code]);
 		} else {
-			error = `Invalid selected country code: "${code}"`;
+			error = `${loc.get('Invalid country')} "${code}"`;
 		}
 	} else {
-		error = `Required`;
+		error = loc.get('Required');
 	}
 }
 
@@ -32,7 +36,7 @@ function handleInput (ev) {
 </script>
 
 {#if countries && country}
-	<Input label="Countries" {id} {error}>
+	<Input label={loc.get('Countries')} {id} {error}>
 		<input {id} name={id} list={idData} 
 			bind:value={country.countryName} 
 			type="search"

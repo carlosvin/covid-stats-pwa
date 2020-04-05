@@ -7,16 +7,19 @@ export let today = getIsoDate();
 export let selected = getIsoDate();
 export let idSuffix = "";
 export let min = "2019-12-01";
+export let label;
+export let title;
 
 $: id = `when-${idSuffix}`;
 </script>
 
-<Input label="End date" id={id}>
+<Input id={id} {label}>
     <input
         type="date"
         {id} name={id}
         bind:value={selected}
         min={min}
         max={today}
-        aria-label="Choose the end date for the time serie" />
+        {title}
+        aria-label={title} />
 </Input>

@@ -9,6 +9,7 @@ import Error from "../components/Error.svelte";
 import TimeSerieChart from "../components/TimeSerieChart.svelte";
 import DatePicker from "../components/DatePicker.svelte";
 import Flex from "../components/Flex.svelte";
+import { localization } from "../services/localization";
 
 let countries = store.countries;
 let country = store.country;
@@ -17,6 +18,12 @@ let dates = store.dates;
 let isFetching = false;
 let error = undefined;
 let lastDateStr;
+
+let loc;
+
+const unsubscribe = localization.subscribe(value => {
+    loc = value;
+});
 
 onMount(async () => {
     try {
@@ -38,7 +45,7 @@ async function fetchDates(){
         dates = await store.fetchDates(country.countryCode);
     } catch (e) {
         if (e.status === 404) {
-            error = `There is no information for ${country.countryName}`;
+            error = translate(`There is no information for ${country.countryName}`);
         }
         dates = undefined;
         console.warn(e);
@@ -95,8 +102,9 @@ function handleCountryChange({detail}) {
         {/if}
 
         {#if country}
-            <Stats caption='Totals'
-                data={{ Confirmed: country.confirmedCases, Deaths: country.deathsNumber }} />
+        
+            <Stats caption={loc.get('Totals')}
+                data={{[loc.get('Confirmed')]: country.confirmedCases, [loc.get('Deaths')]: country.deathsNumber }} />
         {/if}
     </div>
 
