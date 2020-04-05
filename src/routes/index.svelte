@@ -17,7 +17,6 @@ let dates = store.dates;
 
 let isFetching = false;
 let error = undefined;
-let lastDateStr;
 
 let loc;
 
@@ -109,7 +108,7 @@ function handleCountryChange({detail}) {
     </div>
 
     {#if dates}
-        <TimeSerieChart {dates} {lastDateStr}/>
+        <TimeSerieChart {dates} />
     {/if}
 
     <Error msg={error}/>

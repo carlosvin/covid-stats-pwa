@@ -2,12 +2,12 @@
   import Chart from "svelte-frappe-charts";
   import Stats from "./Stats.svelte";
   import DatePicker from "./DatePicker.svelte";
-  import { filterByDate } from "../services/dates";
+  import { filterByDate, getIsoDate } from "../services/dates";
   import { localization } from "../services/localization";
   import { COLORS } from "../constants";
 
   export let dates;
-  export let lastDateStr;
+  let lastDateStr = getIsoDate();
 
   let loc;
 
@@ -24,7 +24,7 @@
     const confirmedTxt = loc.get("Confirmed");
     const deathsTxt = loc.get("Deaths");
     return {
-      labels: [...datesMap.keys()],
+      labels: [...datesMap.keys()].map(d => loc.formatDateStr(d)),
       datasets: [
         { name: confirmedTxt, values: confirmedList },
         { name: deathsTxt, values: deathsList }
@@ -56,6 +56,6 @@
     colors={[...COLORS, 'red', 'blue']} />
   <Stats
     data={getData(datesMap, loc).totals}
-    caption={`${loc.get('Totals on')} ${lastDateStr}`} />
+    caption={`${loc.get('Totals on')} ${loc.formatDate(new Date(lastDateStr))}`} />
 
 </div>
