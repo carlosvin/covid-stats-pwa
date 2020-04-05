@@ -4,7 +4,11 @@ const KEYS = {
     COUNTRY: 'country',
     COUNTRIES: 'countries',
     DATES_BY_COUNTRY: 'dates_by_country',
-}; 
+};
+
+// 30 min
+const TTL_MINUTES = 30;
+const TTL_MS = 1000 * 60 * TTL_MINUTES;
 
 class Store {
 
@@ -76,7 +80,7 @@ class Store {
     }
 
     _isTooOld(timestamp = 0) {
-        return (new Date().getTime() - timestamp) > 3600000;
+        return (new Date().getTime() - timestamp) > TTL_MS;
     }
 
     _save(key, value) {
