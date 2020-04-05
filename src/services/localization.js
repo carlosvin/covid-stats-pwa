@@ -26,11 +26,11 @@ class Localization {
         return this;
     }
 
-    get(key){
+    get(key, def = undefined){
         if (this._translations && key in this._translations) {
             return this._translations[key];
         }
-        return key;
+        return def || key;
     }
 }
 

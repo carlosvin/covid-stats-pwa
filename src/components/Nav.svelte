@@ -1,10 +1,15 @@
 <script>
+  import { localization } from "../services/localization";
+
+  let loc;
+  const unsubscribe = localization.subscribe(value => (loc = value));
+
 	export let segment;
 	let isOffline = false;
 
 	if (typeof window !== 'undefined') {
-		window.addEventListener('online',  updateOnlineStatus);
-		window.addEventListener('offline', updateOnlineStatus);	
+		window.addEventListener(loc.get('online'),  updateOnlineStatus);
+		window.addEventListener(loc.get('offline'), updateOnlineStatus);	
 	}
 
 	function updateOnlineStatus(event) {
@@ -63,8 +68,8 @@
 
 <nav>
 	<ul>
-		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
-		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
+		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>{loc.get('home')}</a></li>
+		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>{loc.get('about')}</a></li>
 	</ul>
 	{#if isOffline}
 		<p class='offline'>offline</p>

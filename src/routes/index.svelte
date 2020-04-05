@@ -115,6 +115,6 @@ function handleCountryChange({detail}) {
     <Error msg={error}/>
 
     {#if isFetching}
-        <p><Spinner>Fetching...</Spinner></p>
+        <p><Spinner>{loc.get('Fetching')}...</Spinner></p>
     {/if}
  </div>

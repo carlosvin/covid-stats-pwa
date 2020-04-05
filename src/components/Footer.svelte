@@ -1,6 +1,11 @@
 <script>
   import { bugs, repository } from "../../package.json";
   import { name } from "../../static/manifest.json";
+  import { localization } from "../services/localization";
+
+  let loc;
+
+  const unsubscribe = localization.subscribe(value => (loc = value));
 </script>
 
 <style>
@@ -23,14 +28,18 @@
   span {
     padding: 0.4em;
   }
+
+  a {
+    white-space: nowrap;
+  }
 </style>
 
 <footer>
   <span>
     <strong>{name}</strong>
-    is Open Source project:
-    <a href={repository.url}>Source code</a>
+    {loc.get('is Open Source project')}:
+    <a href={repository.url}>{loc.get('Source code')}</a>
     |
-    <a href={bugs.url}>Issues</a>
+    <a href={bugs.url}>{loc.get('Issues')}</a>
   </span>
 </footer>
