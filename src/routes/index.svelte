@@ -8,7 +8,6 @@ import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
 import TimeSerieChart from "../components/TimeSerieChart.svelte";
 import DatePicker from "../components/DatePicker.svelte";
-import Flex from "../components/Flex.svelte";
 import { localization } from "../services/localization";
 
 let countries = store.countries;

@@ -4,7 +4,10 @@ export function getIsoDate (date = new Date()) {
 }
 
 export function getIsoDateTodayMinus(minusDays = 0) {
-    const date = new Date();
+    return getIsoDateMinus(new Date(), minusDays);
+}
+
+export function getIsoDateMinus(date, minusDays = 0){
     if (minusDays) {
         date.setDate(date.getDate() - minusDays);
     }
@@ -12,14 +15,18 @@ export function getIsoDateTodayMinus(minusDays = 0) {
 }
 
 /** @returns a Map with filtered objects by date. The key must be a valid ISO string date */
-export function filterByDate(datesMap, lastDateIsoStr = undefined) {
+export function filterByDate(datesMap, start, end) {
     const map = new Map();
 
-    const lastEpochSeconds = lastDateIsoStr ? new Date(lastDateIsoStr).getTime() / 1000 : Infinity;
+    const startEpochSeconds = new Date(start).getTime() / 1000;
+    const endEpochSeconds = new Date(end).getTime() / 1000;
 
     for (const k in datesMap) {
         const date = datesMap[k];
-        if (date.epochSeconds > lastEpochSeconds) {
+        if (date.epochSeconds < startEpochSeconds) {
+            continue;
+        }
+        if (date.epochSeconds > endEpochSeconds) {
             continue;
         }
         if (date.confirmedCases === 0 && date.deathsNumber === 0 && map.size === 0) {

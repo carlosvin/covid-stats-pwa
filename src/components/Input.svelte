@@ -1,6 +1,5 @@
 <script>
 import Error from './Error.svelte';
-import Flex from './Flex.svelte';
 
 export let id;
 export let label;

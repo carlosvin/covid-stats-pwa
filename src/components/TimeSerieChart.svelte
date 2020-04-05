@@ -1,19 +1,20 @@
 <script>
   import Chart from "svelte-frappe-charts";
   import Stats from "./Stats.svelte";
-  import DatePicker from "./DatePicker.svelte";
+  import DateRange from "./DateRange.svelte";
   import { filterByDate, getIsoDate } from "../services/dates";
   import { localization } from "../services/localization";
   import { COLORS } from "../constants";
 
   export let dates;
   let lastDateStr = getIsoDate();
-
+  let selectedStart;
+  let selectedEnd;
   let loc;
 
   const unsubscribe = localization.subscribe(value => (loc = value));
 
-  $: datesMap = filterByDate(dates, lastDateStr);
+  $: datesMap = filterByDate(dates, selectedStart, selectedEnd);
 
   function getData(datesMap, loc) {
     const values = [...datesMap.values()];
@@ -43,10 +44,13 @@
 
 <div>
 
-  <DatePicker
-    bind:selected={lastDateStr}
-    label={loc.get('End date')}
-    title={loc.get('Choose the end date for the time series')} />
+  <DateRange
+    bind:selectedStart={selectedStart}
+    bind:selectedEnd={selectedEnd}
+    labelStart={loc.get('Start date')}
+    labelEnd={loc.get('End date')}
+    titleStart={loc.get('Choose the start date for the time series')}
+    titleEnd={loc.get('Choose the end date for the time series')} />
 
   <Chart
     data={getData(datesMap, loc)}
