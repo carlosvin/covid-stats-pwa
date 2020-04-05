@@ -32,6 +32,14 @@ class Localization {
         }
         return def || key;
     }
+
+    placeholders (key, props) {
+        let str = this.get(key);
+        for (const [k, v] of Object.entries(props)) {
+            str = str.replace(`{${k}}`, v);
+        }
+        return str;
+    }
 }
 
 export const localization = writable(new Localization());

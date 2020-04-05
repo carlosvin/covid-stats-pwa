@@ -18,6 +18,14 @@ const translations = {
     'home': 'inicio',
     'about': 'acerca de',
     'Fetching': 'Actualizando',
+    'Data comes from ECDC': `Los datos son descargados de una
+        <a href="http://covid-rest.appspot.com/docs/index.html">API REST</a>
+        que publica datos del 
+        <a
+        href="https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide">
+        ECDC
+        </a>`,
+    'App description': 'Aplicación para monitorizar las estadísticas del COVID-19 por país y por fecha',
 };
 
 export default translations;
