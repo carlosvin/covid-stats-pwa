@@ -6,6 +6,7 @@
 	"description": "Web app to monitor COVID-19 statistics by country and by date",
 	"display": "standalone",
 	"start_url": "/",
+	"categories": ["health", "medical", "statistics"],
 	"icons": [
 		{
 			"src": "logo-192.png",
