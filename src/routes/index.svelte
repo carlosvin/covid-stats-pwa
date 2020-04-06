@@ -6,7 +6,7 @@ import CountrySelector from "../components/CountrySelector.svelte";
 import Stats from "../components/Stats.svelte";
 import Spinner from "../components/Spinner.svelte";
 import Error from "../components/Error.svelte";
-import TimeSerieChart from "../components/TimeSerieChart.svelte";
+import TimeSeriesChart from "../components/TimeSeriesChart.svelte";
 import DatePicker from "../components/DatePicker.svelte";
 import { localization } from "../services/localization";
 
@@ -107,7 +107,7 @@ function handleCountryChange({detail}) {
     </div>
 
     {#if dates}
-        <TimeSerieChart {dates} />
+        <TimeSeriesChart {dates} />
     {/if}
 
     <Error msg={error}/>
