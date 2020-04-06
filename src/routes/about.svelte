@@ -3,16 +3,12 @@
     version,
     description,
     name as appName,
-    keywords,
-    bugs,
-    repository
+    keywords
   } from "../../package.json";
   import { name } from "../../static/manifest.json";
-
   import { localization } from "../services/localization";
 
   let loc;
-
   const unsubscribe = localization.subscribe(value => (loc = value));
   let desc = loc.get('App description', description);
 </script>
@@ -27,8 +23,6 @@
 
 <svelte:head>
   <title>{loc.get('About')} {name}</title>
-  <meta name="description" content={desc} />
-  <meta name="subject" content={desc} />
 </svelte:head>
 
 <h1>{name}</h1>

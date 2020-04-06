@@ -3,7 +3,7 @@
 	"theme_color": "#460321",
 	"name": "COVID-19 Stats",
 	"short_name": "COVID stats",
-	"description": "PWA to monitor COVID-19 statistics by country and by date",
+	"description": "Web app to monitor COVID-19 statistics by country and by date",
 	"display": "standalone",
 	"start_url": "/",
 	"icons": [

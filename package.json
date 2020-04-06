@@ -1,6 +1,6 @@
 {
   "name": "covid-stats-pwa",
-  "description": "PWA to monitor COVID-19 statistics by country and by date",
+  "description": "Web app to monitor COVID-19 statistics by country and by date",
   "version": "0.0.1",
   "homepage": "https://covid-stats-pwa.netlify.app",
   "scripts": {
