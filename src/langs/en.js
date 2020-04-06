@@ -19,7 +19,7 @@ const translations = {
     'home': 'home',
     'about': 'about',
     'Fetching': 'Fetching',
-    'Data comes from ECDC': `All the data is fetched from
+    'Data comes from ECDC': `Data is fetched from a 
         <a href="http://covid-rest.appspot.com/docs/index.html">REST API</a>
         which publishes data from
         <a
