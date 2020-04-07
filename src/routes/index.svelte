@@ -32,7 +32,11 @@
     }
     isFetching = false;
     country = store.country;
-    fetchDates(country.countryCode);
+    if (country) {
+      fetchDates(country.countryCode);
+    } else {
+      error = 'There was an error fetching countries';
+    }
   });
 
   async function fetchDates(countryCode) {
