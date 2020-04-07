@@ -16,10 +16,11 @@
     justify-items: stretch;
     flex-direction: column;
     width: 100%;
-    min-height: calc(100vh - 5rem);
+    min-height: calc(100vh - 1.5rem);
     background-color: white;
     padding: 2rem;
     margin: 0 auto;
+    padding-top: 4rem;
     box-sizing: border-box;
     text-align: center;
   }

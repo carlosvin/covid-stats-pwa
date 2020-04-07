@@ -21,15 +21,18 @@
 
 <style>
   nav {
+    width: 100%;
+    position: fixed;
     display: flex;
     flex-flow: row;
     vertical-align: middle;
-    background-color: rgba(70, 3, 33, 0.156);
+    background-color: #460321;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .offline {
     display: table;
-    color: brown;
+    color: rgba(255, 255, 255, 0.8);
     border-radius: 0.3em;
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -59,6 +62,7 @@
   }
 
   [aria-current] {
+    color: #450320;
     position: relative;
     display: inline-block;
     background-color: rgba(255, 255, 255, 0.8);
