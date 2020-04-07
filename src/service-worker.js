@@ -74,7 +74,6 @@ self.addEventListener('fetch', event => {
 				} catch(err) {
 					const response = await cache.match(event.request);
 					if (response) return response;
-
 					throw err;
 				}
 			})

@@ -42,6 +42,7 @@
   async function fetchDates(countryCode) {
     isFetching = true;
     error = undefined;
+    dates = store.getDates(countryCode);
     try {
       dates = await store.fetchDates(countryCode);
     } catch (e) {
@@ -50,7 +51,6 @@
           countryCode
         });
       }
-      dates = store.getDates(countryCode);
       console.warn(e);
     }
     isFetching = false;
