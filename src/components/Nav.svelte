@@ -7,7 +7,7 @@
   let desc = loc.get('App description', description);
 
   export let segment;
-  let isOffline = false;
+  let isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
 
   if (typeof window !== "undefined") {
     window.addEventListener(loc.get("online"), updateOnlineStatus);
@@ -15,7 +15,7 @@
   }
 
   function updateOnlineStatus(event) {
-    isOffline = navigator.onLine ? false : true;
+    isOffline = !navigator.onLine;
   }
 </script>
 
@@ -28,9 +28,12 @@
   }
 
   .offline {
+    display: table;
     color: brown;
     border-radius: 0.3em;
-    padding: 0.3em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    margin: 1em;
     vertical-align: middle;
     border: 1px solid;
     font-size: smaller;
@@ -88,6 +91,6 @@
     </li>
   </ul>
   {#if isOffline}
-    <p class="offline">offline</p>
+    <div class="offline">offline</div>
   {/if}
 </nav>
