@@ -67,7 +67,7 @@ figcaption {
       data={getData(datesMap, loc)}
       type="line"
       axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
-      lineOptions={{ hideDots: 1, areaFill: 1, heatline: 1, dotSize: 0, hideLine: 0, regionFill: 1 }}
+      lineOptions={{ hideDots: 1, areaFill: 1, heatline: 0, dotSize: 0, hideLine: 0, regionFill: 0}}
       colors={[...COLORS, 'red', 'blue']} />
     <Stats
       data={getData(datesMap, loc).totals}

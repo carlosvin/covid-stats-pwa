@@ -17,7 +17,7 @@
     background-color: rgba(70, 3, 33, 0.05);
     color: white;
     text-align: center;
-    color: gray;
+    color: #464444;
     font-size: smaller;
     display: flex;
     flex-flow: wrap;
