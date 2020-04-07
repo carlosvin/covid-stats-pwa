@@ -50,7 +50,7 @@
           countryCode
         });
       }
-      dates = undefined;
+      dates = store.getDates(countryCode);
       console.warn(e);
     }
     isFetching = false;
