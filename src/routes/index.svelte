@@ -33,17 +33,17 @@ onMount(async () => {
     }
     isFetching = false;
     country = store.country;
-    fetchDates();
+    fetchDates(country.countryCode);
 });
 
-async function fetchDates(){
+async function fetchDates(countryCode){
     isFetching = true;
     error = undefined;
     try {
-        dates = await store.fetchDates(country.countryCode);
+        dates = await store.fetchDates(countryCode);
     } catch (e) {
         if (e.status === 404) {
-            error = translate(`There is no information for ${country.countryName}`);
+            error = loc.placeholders('There is no information for {countryCode}', {countryCode});
         }
         dates = undefined;
         console.warn(e);
@@ -55,7 +55,7 @@ function handleCountryChange({detail}) {
     country = detail;
     store.setCountry(country);
     dates = undefined;
-    fetchDates();
+    fetchDates(country.countryCode);
 }
 </script>
 
@@ -81,7 +81,6 @@ function handleCountryChange({detail}) {
     margin-bottom: 1em;
   }
 }
-
 </style>
 
 <svelte:head>
@@ -100,14 +99,13 @@ function handleCountryChange({detail}) {
         {/if}
 
         {#if country}
-        
             <Stats caption={loc.get('Totals')}
                 data={{[loc.get('Confirmed')]: country.confirmedCases, [loc.get('Deaths')]: country.deathsNumber }} />
         {/if}
     </div>
 
     {#if dates}
-        <TimeSeriesChart {dates} />
+        <TimeSeriesChart {dates} caption={loc.get('Last update') + ' ' +  store.getLastUpdate(country.countryCode).toLocaleString()} />
     {/if}
 
     <Error msg={error}/>

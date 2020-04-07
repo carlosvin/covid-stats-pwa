@@ -29,6 +29,8 @@ const translations = {
         </a>`,
     'App description': 'Aplicación para monitorizar las estadísticas del COVID-19 por país y por fecha',
     'Invalid range': 'Rango inválido',
+    'There is no information for {countryCode}': 'No hay información para {countryCode}',
+    'Last update': 'Última actualización',
 };
 
 export default translations;

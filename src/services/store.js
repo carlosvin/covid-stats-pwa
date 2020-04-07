@@ -72,11 +72,20 @@ class Store {
     }
 
     async fetchDates(country) {
-        if (!(country in this._datesByCountry) || this._isTooOld(this._datesByCountry[country].timestamp)) {
+        if (this._isTooOld(this.getLastUpdateTs(country))) {
             this._datesByCountry[country] =  {datesInfo: await this._api.fetchCountryDates(country), timestamp: new Date().getTime()};
             this._save(KEYS.DATES_BY_COUNTRY, this._datesByCountry);
         }
         return this._datesByCountry[country].datesInfo;
+    }
+
+    getLastUpdate(country) {
+        const ts = this.getLastUpdateTs(country);
+        return ts && new Date(ts);
+    }
+
+    getLastUpdateTs(country) {
+        return country in this._datesByCountry && this._datesByCountry[country].timestamp;
     }
 
     _isTooOld(timestamp = 0) {

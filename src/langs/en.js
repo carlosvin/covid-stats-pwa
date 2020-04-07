@@ -28,6 +28,8 @@ const translations = {
         </a>`,
     'App description': 'App to monitor COVID-19 statistics by country and by date',
     'Invalid range': 'Invalid range',
+    'There is no information for {countryCode}': 'There is no information for {countryCode}',
+    'Last update': 'Last update',
 
 };
 

@@ -6,6 +6,7 @@
   import { COLORS } from "../constants";
   import { localization } from "../services/localization";
 
+  export let caption;
   export let dates;
   let selectedStart;
   let selectedEnd;
@@ -38,10 +39,19 @@
 </script>
 
 <style>
+figure {
+  margin: 0 0;
+  padding: 0 0;
+}
+
+figcaption {
+  color: gray;
+  font-size: small;
+}
 
 </style>
 
-<div>
+<figure>
 
   <DateRange
     bind:selectedStart={selectedStart}
@@ -61,4 +71,5 @@
       data={getData(datesMap, loc).totals}
       caption={`${loc.formatDateStr(selectedStart)} → ${loc.formatDateStr(selectedEnd)}`} />
   {/if}
-</div>
+  {#if caption}<figcaption>{caption}</figcaption>{/if}
+</figure>
