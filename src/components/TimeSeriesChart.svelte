@@ -46,7 +46,7 @@ figure {
 }
 
 figcaption {
-  color: gray;
+  color: #504f4f;
   font-size: small;
 }
 
