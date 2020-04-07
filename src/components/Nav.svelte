@@ -65,6 +65,7 @@
     text-decoration: none;
     padding: 0.3em 0.5em;
     display: block;
+    min-height: 2.5rem;
   }
 </style>
 

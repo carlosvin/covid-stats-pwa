@@ -1,13 +1,24 @@
 <style>
 /* TODO use https://svelte.dev/docs#svelte_transition */
-    div {
+    .container {
         display: flex;
         flex-direction: column;
         text-align: center;
         justify-items: center;
         align-items: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+    .content {
+        position: absolute;
+        top: 50%;
     }
     svg {
+        
         animation: 2s linear infinite svg-animation;
         max-width: 50px;
     }
@@ -53,9 +64,11 @@
     }
 </style>
 
-<div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="45" />
-    </svg>
-    <slot />
+<div class='container'>
+    <div class='content'>
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" />
+        </svg>
+        <slot />
+    </div>
 </div>

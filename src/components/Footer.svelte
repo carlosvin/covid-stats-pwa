@@ -23,6 +23,7 @@
     flex-flow: wrap;
     justify-items: center;
     justify-content: space-around;
+    min-height: 1.5rem;
   }
 
   span {
