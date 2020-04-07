@@ -8,6 +8,7 @@
 
   export let caption;
   export let dates;
+  export let disabled = false;
   let selectedStart;
   let selectedEnd;
   let loc;
@@ -54,6 +55,7 @@ figcaption {
 <figure>
 
   <DateRange
+    {disabled}
     bind:selectedStart={selectedStart}
     bind:selectedEnd={selectedEnd}
     labelStart={loc.get('Start date')}

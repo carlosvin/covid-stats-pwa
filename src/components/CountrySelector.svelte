@@ -11,6 +11,7 @@ const dispatch = createEventDispatcher();
 export let countries;
 export let country;
 export let idSuffix = '';
+export let disabled = false;
 let error = undefined;
 
 $: id = `countries${idSuffix}`;
@@ -38,6 +39,7 @@ function handleInput (ev) {
 {#if countries && country}
 	<Input label={loc.get('Countries')} {id} {error}>
 		<input {id} name={id} list={idData} 
+			{disabled}
 			bind:value={country.countryName} 
 			type="search"
 			on:change={handleChange}

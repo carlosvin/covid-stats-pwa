@@ -10,12 +10,14 @@ export let max = getIsoDate();
 export let label;
 export let title;
 export let error = undefined;
+export let disabled = false;
 
 $: id = `when-${idSuffix}`;
 </script>
 
 <Input id={id} {label} {error}>
     <input
+        {disabled}
         type="date"
         {id} name={id}
         bind:value={selected}

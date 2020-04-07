@@ -13,6 +13,7 @@
   export let labelEnd;
   export let titleStart = undefined;
   export let titleEnd = undefined;
+  export let disabled = false;
 
   export let selectedStart = getIsoDateTodayMinus(30);
   export let selectedEnd = getIsoDate();
@@ -53,6 +54,7 @@ $: {
 
 <div class="container">
   <DatePicker
+    {disabled}
     {min}
     error={errorStart}
     max={maxBegin}
@@ -61,6 +63,7 @@ $: {
     label={labelStart}
     title={titleStart} />
   <DatePicker
+    {disabled}
     error={errorEnd}
     min={minEnd}
     {max}
