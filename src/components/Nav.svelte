@@ -31,9 +31,9 @@
     display: table;
     color: brown;
     border-radius: 0.3em;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
-    margin: 1em;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    margin: 0.6rem;
     vertical-align: middle;
     border: 1px solid;
     font-size: smaller;
@@ -68,7 +68,6 @@
     text-decoration: none;
     padding: 0.3em 0.5em;
     display: block;
-    min-height: 2.5rem;
   }
 </style>
 
