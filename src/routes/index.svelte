@@ -16,7 +16,6 @@ let dates = store.dates;
 
 let isFetching = false;
 let error = undefined;
-
 let loc;
 
 const unsubscribe = localization.subscribe(value => {

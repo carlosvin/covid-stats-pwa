@@ -7,7 +7,7 @@ const KEYS = {
 };
 
 // 30 min
-const TTL_MINUTES = 30;
+const TTL_MINUTES = 15;
 const TTL_MS = 1000 * 60 * TTL_MINUTES;
 
 class Store {
