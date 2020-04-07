@@ -30,6 +30,7 @@ const translations = {
     'Invalid range': 'Invalid range',
     'There is no information for {countryCode}': 'There is no information for {countryCode}',
     'Last update': 'Last update',
+    'Error fetching countries stats': 'Error fetching countries stats',
 
 };
 

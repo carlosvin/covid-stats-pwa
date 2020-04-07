@@ -31,6 +31,7 @@ const translations = {
     'Invalid range': 'Rango inválido',
     'There is no information for {countryCode}': 'No hay información para {countryCode}',
     'Last update': 'Última actualización',
+    'Error fetching countries stats': 'Error obteniendo estadísticas de los países',
 };
 
 export default translations;

@@ -35,7 +35,7 @@
     if (country) {
       fetchDates(country.countryCode);
     } else {
-      error = 'There was an error fetching countries';
+      error = loc.get('Error fetching countries stats');
     }
   });
 
