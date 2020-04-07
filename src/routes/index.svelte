@@ -4,11 +4,11 @@
   import { getIsoDate } from "../services/dates";
   import CountrySelector from "../components/CountrySelector.svelte";
   import Stats from "../components/Stats.svelte";
-  import Spinner from "../components/Spinner.svelte";
   import Error from "../components/Error.svelte";
   import TimeSeriesChart from "../components/TimeSeriesChart.svelte";
   import DatePicker from "../components/DatePicker.svelte";
   import { localization } from "../services/localization";
+  import { fetching } from "../services/status";
 
   let countries = store.countries;
   let country = store.country;
@@ -17,20 +17,23 @@
   let isFetching = false;
   let error = undefined;
   let loc;
-
   const unsubscribe = localization.subscribe(value => {
     loc = value;
   });
 
+  function setFetching (fetchingStatus) {
+    fetching.set(isFetching = fetchingStatus);
+  }
+
   onMount(async () => {
     try {
-      isFetching = true;
+      setFetching(true);
       error = undefined;
       countries = await store.fetchCountries();
     } catch (e) {
       console.warn(e);
     }
-    isFetching = false;
+    setFetching(false);
     country = store.country;
     if (country) {
       fetchDates(country.countryCode);
@@ -40,7 +43,7 @@
   });
 
   async function fetchDates(countryCode) {
-    isFetching = true;
+    setFetching(true);
     error = undefined;
     dates = store.getDates(countryCode);
     try {
@@ -53,7 +56,7 @@
       }
       console.warn(e);
     }
-    isFetching = false;
+    setFetching(false);
   }
 
   function handleCountryChange({ detail }) {
@@ -121,10 +124,4 @@
   {/if}
 
   <Error msg={error} />
-
-  {#if isFetching}
-    <p>
-      <Spinner>{loc.get('Fetching')}...</Spinner>
-    </p>
-  {/if}
 </div>

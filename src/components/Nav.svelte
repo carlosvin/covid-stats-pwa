@@ -1,6 +1,11 @@
 <script>
   import { description } from "../../package.json";
   import { localization } from "../services/localization";
+  import { fetching } from "../services/status";
+  import Spinner from 'svelte-spinner';
+  
+  let isFetching;
+	const fetchingUnsubs = fetching.subscribe(value => (isFetching = value));
 
   let loc;
   const unsubscribe = localization.subscribe(value => (loc = value));
@@ -40,6 +45,11 @@
     vertical-align: middle;
     border: 1px solid;
     font-size: smaller;
+  }
+
+  .spinner {
+    margin-top: 0.2rem;
+    margin-right: 0.3rem;
   }
 
   ul {
@@ -95,5 +105,10 @@
   </ul>
   {#if isOffline}
     <div class="offline">offline</div>
+  {/if}
+  {#if isFetching}
+    <div class='spinner'>
+      <Spinner size="30" color="#fff" />
+    </div>
   {/if}
 </nav>
