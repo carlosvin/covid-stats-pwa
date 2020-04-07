@@ -2,7 +2,7 @@
   import Nav from "../components/Nav.svelte";
   import Footer from "../components/Footer.svelte";
   import { keywords, description, homepage } from "../../package.json";
-  import { name } from "../../static/manifest.json";
+  import { name, theme_color } from "../../static/manifest.json";
 
   export let segment;
 
@@ -34,7 +34,7 @@
   <meta name="description" content={description} />
   <meta property="og:description" content={description} />
   <meta property="twitter:description" content={description} />
-
+  <meta name="theme-color" content={theme_color}>
   <meta property="og:url" content={homepage} />
   <meta property="twitter:url" content={homepage} />
 
