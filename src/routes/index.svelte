@@ -10,13 +10,12 @@
   import { localization } from "../services/localization";
   import { fetching } from "../services/status";
 
-  let countries = store.countries;
-  let country = store.country;
-  let dates = store.dates;
+  let {countries, country, dates} = store;
 
   let isFetching = false;
   let error = undefined;
   let loc;
+
   const unsubscribe = localization.subscribe(value => {
     loc = value;
   });
@@ -43,10 +42,10 @@
   });
 
   async function fetchDates(countryCode) {
-    setFetching(true);
     error = undefined;
-    dates = store.getDates(countryCode);
+    dates = store.dates;
     try {
+      setFetching(true);
       dates = await store.fetchDates(countryCode);
     } catch (e) {
       if (e.status === 404) {
@@ -113,7 +112,6 @@
         data={{ [loc.get('Confirmed')]: country.confirmedCases, [loc.get('Deaths')]: country.deathsNumber }} />
     {/if}
   </div>
-
   {#if dates}
     <TimeSeriesChart
       {dates}

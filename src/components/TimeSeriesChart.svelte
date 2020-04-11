@@ -12,10 +12,9 @@
   let selectedStart;
   let selectedEnd;
   let loc;
-
   const unsubscribe = localization.subscribe(value => (loc = value));
 
-  $: datesMap = filterByDate(dates, selectedStart, selectedEnd);
+  $: data =  getData(filterByDate(dates, selectedStart, selectedEnd), loc);
 
   function getData(datesMap, loc) {
     const values = [...datesMap.values()];
@@ -64,13 +63,13 @@ figcaption {
     titleEnd={loc.get('Choose the end date for the time series')} />
   {#if selectedStart && selectedEnd}
     <Chart
-      data={getData(datesMap, loc)}
+      {data}
       type="line"
       axisOptions={{ xAxisMode: 'tick', yAxisMode: 'tick', xIsSeries: true }}
       lineOptions={{ hideDots: 1, areaFill: 1, heatline: 0, dotSize: 0, hideLine: 0, regionFill: 0}}
       colors={[...COLORS, 'red', 'blue']} />
     <Stats
-      data={getData(datesMap, loc).totals}
+      data={data.totals}
       caption={`${loc.formatDateStr(selectedStart)} → ${loc.formatDateStr(selectedEnd)}`} />
   {/if}
   {#if caption}<figcaption>{caption}</figcaption>{/if}
