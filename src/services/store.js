@@ -72,7 +72,7 @@ class Store {
             this._datesByCountry[country] =  {datesInfo: await this._api.fetchCountryDates(country), timestamp: new Date().getTime()};
             this._save(KEYS.DATES_BY_COUNTRY, this._datesByCountry);
         }
-        return this._datesByCountry[country].datesInfo;
+        return this.getDates(country);
     }
 
     getLastUpdate(country) {
