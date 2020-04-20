@@ -14,11 +14,9 @@ class Store {
     constructor() {
         this._api = new ApiClient();
         this._countries = this._read(KEYS.COUNTRIES, {countries: undefined});
-        if (this._countries.countries === {}) {
-            this._countries = {countries: undefined};
-        }
         this._lastCountry = this._read(KEYS.COUNTRY, this.firstCountry);
-        this._datesByCountry = this._read(KEYS.DATES_BY_COUNTRY, {});
+        this._datesByCountry = this._read(KEYS.DATES_BY_COUNTRY, {});    
+        
     }
 
     get country () {
@@ -98,9 +96,13 @@ class Store {
 
     _read(key, def = undefined) {
         if (typeof localStorage !== 'undefined') {
-            const valueStr = localStorage.getItem(key);
-            const value = valueStr ? JSON.parse(valueStr) : undefined;
-            return value ? value : def;
+            try {
+                const valueStr = localStorage.getItem(key);
+                const value = valueStr ? JSON.parse(valueStr) : undefined;
+                return value ? value : def;
+            } catch (e) {
+                console.warn('Error reading data from local storage: ', e);
+            }
         }
         return def;
     }
