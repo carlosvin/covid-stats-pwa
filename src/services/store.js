@@ -6,7 +6,6 @@ const KEYS = {
     DATES_BY_COUNTRY: 'dates_by_country',
 };
 
-// 30 min
 const TTL_MINUTES = 15;
 const TTL_MS = 1000 * 60 * TTL_MINUTES;
 
