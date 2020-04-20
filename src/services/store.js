@@ -14,6 +14,9 @@ class Store {
     constructor() {
         this._api = new ApiClient();
         this._countries = this._read(KEYS.COUNTRIES, {countries: undefined});
+        if (this._countries.countries === {}) {
+            this._countries = {countries: undefined};
+        }
         this._lastCountry = this._read(KEYS.COUNTRY, this.firstCountry);
         this._datesByCountry = this._read(KEYS.DATES_BY_COUNTRY, {});
     }
