@@ -2,6 +2,7 @@
 import { createEventDispatcher} from 'svelte';
 import Input from './Input.svelte';
 import { localization } from '../services/localization';
+import AutoComplete from "simple-svelte-autocomplete";
 
 let loc;
 const unsubscribe = localization.subscribe(value => loc = value);
@@ -15,40 +16,27 @@ export let disabled = false;
 let error = undefined;
 
 $: id = `countries${idSuffix}`;
-$: idData = `countries${idSuffix}-data`;
 $: values = Object.values(countries);
 
-function handleChange ({target}) {
-	const code = target.value;
-	if (code) {
-		if (code in countries) {
-			dispatch('selected', countries[code]);
-		} else {
-			error = `${loc.get('Invalid country')} "${code}"`;
-		}
+function handleChange (country) {
+	error = undefined;
+	if (country) {
+		dispatch('selected', country);
 	} else {
 		error = loc.get('Required');
 	}
-}
-
-function handleInput (ev) {
-	error = undefined;
 }
 </script>
 
 {#if countries && country}
 	<Input label={loc.get('Countries')} {id} {error}>
-		<input {id} name={id} list={idData} 
-			{disabled}
-			bind:value={country.countryName} 
-			type="search"
+		<AutoComplete
+			{disabled} required={true}
+			items={values}
+			onChange={handleChange}
+			bind:selectedItem={country}
 			on:change={handleChange}
-			on:input={handleInput}
-			required/>
-		<datalist id={idData}>
-			{#each values as {countryCode, countryName}}
-				<option value={countryCode} >{countryName}</option>
-			{/each}
-		</datalist>
+			labelFieldName="countryName"
+			keywordsFunction={country => country.countryName + ' ' + country.countryCode} />
 	</Input>
 {/if}

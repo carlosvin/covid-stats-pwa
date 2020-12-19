@@ -27,6 +27,7 @@
   "dependencies": {
     "compression": "^1",
     "polka": "next",
+    "simple-svelte-autocomplete": "^1.2.4",
     "svelte-spinner": "^2"
   },
   "devDependencies": {
