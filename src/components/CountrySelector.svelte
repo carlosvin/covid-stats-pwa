@@ -39,9 +39,9 @@ function handleInput (ev) {
 {#if countries && country}
 	<Input label={loc.get('Countries')} {id} {error}>
 		<input {id} name={id} list={idData} 
+			type="list"
 			{disabled}
 			bind:value={country.countryName} 
-			type="search"
 			on:change={handleChange}
 			on:input={handleInput}
 			required/>
