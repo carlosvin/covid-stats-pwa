@@ -1,7 +1,6 @@
 import {Url} from './url';
 
 export class ApiClient {
-
     constructor(base = 'https://covid-rest.appspot.com'){
         this._url = new Url(base);
     }
