@@ -16,7 +16,6 @@ export let disabled = false;
 let error = undefined;
 
 $: id = `countries${idSuffix}`;
-$: idData = `countries${idSuffix}-data`;
 $: values = Object.values(countries);
 
 function handleChange (country) {
