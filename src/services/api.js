@@ -1,6 +1,7 @@
 import {Url} from './url';
 
 export class ApiClient {
+    // TODO https://covid19tracking.narrativa.com/index_en.html
     constructor(base = 'https://covid-rest.appspot.com'){
         this._url = new Url(base);
     }

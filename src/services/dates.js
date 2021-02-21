@@ -30,7 +30,7 @@ export function filterByDate(datesMap, start, end) {
         if (date.epochDay > endEpochDay) {
             continue;
         }
-        if (date.confirmedCases === 0 && date.deathsNumber === 0 && map.size === 0) {
+        if (date.confirmedCases === 0 && date.positiveRate === 0 && map.size === 0) {
             continue;
         }
         map.set(k, date);

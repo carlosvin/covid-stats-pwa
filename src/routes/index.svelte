@@ -109,7 +109,7 @@
     {#if country}
       <Stats
         caption={loc.get('Totals')}
-        data={{ [loc.get('Confirmed')]: country.confirmedCases, [loc.get('Deaths')]: country.deathsNumber }} />
+        data={{ [loc.get('Confirmed')]: country.confirmedCases, [loc.get('PositivityRatio')]: country.positiveRate }} />
     {/if}
   </div>
   {#if dates}

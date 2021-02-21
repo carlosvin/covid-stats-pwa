@@ -3,7 +3,7 @@
 const translations = {
     'Totals': 'Totales',
     'Confirmed': 'Confirmados',
-    'Deaths': 'Defunciones',
+    'PositivityRatio': '% Tests Positivos',
     'Totals on': 'Totales en',
     'Countries': 'Países',
     'Required': 'Obligatorio',

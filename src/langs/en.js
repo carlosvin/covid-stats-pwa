@@ -2,7 +2,7 @@
 const translations = {
     'Totals': 'Totals',
     'Confirmed': 'Confirmed',
-    'Deaths': 'Deaths',
+    'PositivityRatio': 'Positivity ratio',
     'Totals on': 'Totals on',
     'Countries': 'Countries',
     'Required': 'Required',

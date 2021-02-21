@@ -21,18 +21,18 @@
     let totalC = 0;
     let totalD = 0;
     const confirmedList = values.map(v => v.confirmedCases);
-    const deathsList = values.map(v => v.deathsNumber);
+    const positiveRatioList = values.map(v => v.positiveRate);
     const confirmedTxt = loc.get("Confirmed");
-    const deathsTxt = loc.get("Deaths");
+    const positiveRatioTxt = loc.get("PositivityRatio");
     return {
       labels: [...datesMap.keys()].map(d => loc.formatDateStr(d)),
       datasets: [
         { name: confirmedTxt, values: confirmedList },
-        { name: deathsTxt, values: deathsList }
+        { name: positiveRatioTxt, values: positiveRatioList }
       ],
       totals: {
         [confirmedTxt]: confirmedList.reduce((a, b) => a + b),
-        [deathsTxt]: deathsList.reduce((a, b) => a + b)
+        [positiveRatioTxt]: positiveRatioList.reduce((a, b) => a + b) / positiveRatioList.length
       }
     };
   }
