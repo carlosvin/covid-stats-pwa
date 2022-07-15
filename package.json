@@ -51,7 +51,7 @@
     "serialize-javascript": "^5.0.1",
     "serve": "^11.3.2",
     "sirv": "^1.0.6",
-    "svelte": "^3.25.0",
+    "svelte": "^3.49.0",
     "svelte-frappe-charts": "^1.2.2"
   },
   "keywords": [
